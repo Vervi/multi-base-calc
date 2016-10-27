@@ -1,2 +1,6 @@
-# project1
-The place to keep your code for project 1.
+# Project Zero
+
+A Swing project for CISC 3120, Fall 2016. See the [instructions](http://bc-cisc3120-f16.github.io/project1).
+
+## Works Cited
+
