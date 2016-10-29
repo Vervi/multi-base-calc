@@ -32,27 +32,32 @@ public class Base4Panel extends JPanel implements ActionListener {
 	Base4Panel() {
 		setLayout(new MigLayout("", "[45px][39px][41px][grow][39px][41px][41px][41px][-89.00px][69px]", "[29px][][][][][][]"));
 		
-		one = new JButton("1");
-		one.addActionListener(this);
+	
 		
 		textField = new JTextField();
 		add(textField, "cell 3 2 3 1,growx");
 		textField.setColumns(10);
-		add(one, "cell 4 3,alignx left,aligny top");
-		
-		two = new JButton("2"); 
-		two.addActionListener(this);
-		clear = new JButton("C");
-		clear.addActionListener(this);
-		add(clear, "cell 5 3,alignx left,aligny top");
-		add(two, "cell 3 4,alignx left,aligny top");
-		three = new JButton("3"); 
-		three.addActionListener(this);	
-		add(three, "cell 4 4,alignx left,aligny top");
 		
 		zero = new JButton("0"); 
 		zero.addActionListener(this);
 		add(zero, "cell 3 3,alignx left,aligny top");
+		
+		one = new JButton("1");
+		one.addActionListener(this);
+		add(one, "cell 4 3,alignx left,aligny top");
+		
+		two = new JButton("2"); 
+		two.addActionListener(this);
+		add(two, "cell 3 4,alignx left,aligny top");
+		
+		three = new JButton("3"); 
+		three.addActionListener(this);	
+		add(three, "cell 4 4,alignx left,aligny top");
+		
+		
+		clear = new JButton("C");
+		clear.addActionListener(this);
+		add(clear, "cell 5 3,alignx left,aligny top");
 		
 		equals = new JButton("=");
 		equals.addActionListener(this);
@@ -62,16 +67,16 @@ public class Base4Panel extends JPanel implements ActionListener {
 		
 		plus = new JButton("+"); 
 		plus.addActionListener(this);
-		
-		
-		
 		add(plus, "cell 5 4,alignx left,aligny top");
+
 		divide = new JButton("/"); 
 		divide.addActionListener(this);
 		add(divide, "cell 3 5,alignx left,aligny top");
+		
 		minus = new JButton("-"); 
 		minus.addActionListener(this);
 		add(minus, "cell 4 5,alignx left,aligny top");
+		
 		multiply = new JButton("x"); 
 		multiply.addActionListener(this);
 		add(multiply, "cell 5 5,alignx left,aligny top");
@@ -100,34 +105,31 @@ public class Base4Panel extends JPanel implements ActionListener {
 		if (click.getSource() == clear )
 			textField.setText("");
 		
-		
-		
-		
 		if (click.getSource() == plus)
 		{
-			inputA =textField.getText();
-			textField.setText("");
+			readIn(); 
 		}
 		if (click.getSource() == minus)
 		{
-			inputA =textField.getText();
-			textField.setText("");
+			readIn();
 		}	
 		if (click.getSource() == multiply)
 		{
-			inputA =textField.getText();
+			readIn();
 		
 		}	
 		if (click.getSource() == divide)
 		{
-			inputA =textField.getText();
-			textField.setText("");
+			readIn();
 		}	
 		
-		if (click.getSource() == plus)
+		if (click.getSource() == equals)
 		{
-			inputA =textField.getText();
-			textField.setText("");	
+			inputB =textField.getText();
+			
+			textField.setText(result);
+			
+			
 		}	
 		
 		
