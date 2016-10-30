@@ -3,10 +3,11 @@ import java.awt.event.*;
 
 import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
+import java.util.ArrayList;
 
 public class Base4Panel extends JPanel implements ActionListener {
 	private Base4Calc calc; // this object will actually do the calculating work
-	
+	private ArrayList<String> arr = new ArrayList<String>();
 	
 	JButton zero, 
 	one, 
@@ -22,10 +23,16 @@ public class Base4Panel extends JPanel implements ActionListener {
 	equals,
 	clear;
 	
+	String lastOp="";
 
 	
 	
-	private String inputA, inputB, result;
+	
+	String inputA="0",
+			inputB="0",
+			result="0";
+	
+	
 	private int base4=4;
 	private JTextField textField;
 
@@ -59,31 +66,57 @@ public class Base4Panel extends JPanel implements ActionListener {
 		clear.addActionListener(this);
 		add(clear, "cell 5 3,alignx left,aligny top");
 		
-		equals = new JButton("=");
-		equals.addActionListener(this);
-		add(equals, "cell 8 5,alignx left,aligny top");
-		
+	
 		
 		
 		plus = new JButton("+"); 
 		plus.addActionListener(this);
-		equals.setActionCommand("sum");
 		add(plus, "cell 5 4,alignx left,aligny top");
 
 		divide = new JButton("/"); 
 		divide.addActionListener(this);
-		equals.setActionCommand("divide");
+		//divide.setActionCommand("divide");
 		add(divide, "cell 3 5,alignx left,aligny top");
 		
 		minus = new JButton("-"); 
 		minus.addActionListener(this);
-		equals.setActionCommand("subtract");
+		//minus.setActionCommand("subtract");
 		add(minus, "cell 4 5,alignx left,aligny top");
 		
 		multiply = new JButton("x"); 
 		multiply.addActionListener(this);
-		equals.setActionCommand("multi");
+		//multiply.setActionCommand("multi");
 		add(multiply, "cell 5 5,alignx left,aligny top");
+		
+		
+		equals = new JButton("=");
+		equals.addActionListener(new ActionListener(){
+				public void actionPerformed (ActionEvent e)
+				{
+					inputB =textField.getText();
+					
+					switch(e.getActionCommand())
+										
+					case "+":
+						result = calc.sum(inputA, inputB);
+						break;
+						
+					case "/":
+						result = calc.divide(inputA, inputB);
+						break;
+					case "-":
+						result = calc.subtract(inputA, inputB);
+						break;
+									
+					case "*":
+						result = calc.multiply(inputA, inputB);
+						break;
+				}
+		}
+		);
+			
+		
+		add(equals, "cell 8 5,alignx left,aligny top");
 		
 	
 
@@ -96,81 +129,56 @@ public class Base4Panel extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent click)
 	{
+		
 		if (click.getSource() == zero)
 			textField.setText(textField.getText().concat("0"));
 		if (click.getSource() == one)
 			textField.setText(textField.getText().concat("1"));
-		
 		if (click.getSource() == two)
 			textField.setText(textField.getText().concat("2"));
 		if (click.getSource() == three )
 			textField.setText(textField.getText().concat("3"));
-				
 		if (click.getSource() == clear )
 			textField.setText("");
 		
+		
+		
 		if (click.getSource() == plus)
-		{
 			readIn(); 
-		}
+			lastOp =click.getActionCommand();
 		if (click.getSource() == minus)
-		{
 			readIn();
-		}	
+		lastOp =click.getActionCommand();
 		if (click.getSource() == multiply)
-		{
 			readIn();
-		
-		}	
 		if (click.getSource() == divide)
-		{
 			readIn();
-		}	
-		
-		if (click.getSource() == equals)
-		{
-			inputB =textField.getText();
-			
-			switch(function)
-								
-			case "sum":
-				result = calc.sum();
-				break;
-				
-			case "divide":
-				result = calc.divide();
-				break;
-				
-			case "multi":
-				result = calc.multiply();
-				break;
-				
-			case "sub":
-				result = calc.subtract()
-				break;
-				
-			
-			textField.setText(result);
-			
-			
-		}	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 	}
+	
+	
+	
+		
+			print();		
+		}	
+		
+
+		
+		
+	
 	
 	public void readIn() 
 	{
 		inputA =textField.getText();
+		arr.add(inputA);
 		textField.setText("");
+		
+		
+	}
+	public void print()
+	{
+		textField.setText(result);
+		
 	}
 	
 		
@@ -179,4 +187,7 @@ public class Base4Panel extends JPanel implements ActionListener {
 			//calc needs to be involved  when an operand button is clicked
 			//may or may not be needed when a num button is pressed
 			//need 2 string objects
+	
+	//need to handle exceptions as well as output problem
+	//every even num of terms need to be processing and outputting results
 }
