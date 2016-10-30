@@ -25,7 +25,7 @@ public class Base4Panel extends JPanel implements ActionListener {
 
 	
 	
-	private String inputA, inputB;
+	private String inputA, inputB, result;
 	private int base4=4;
 	private JTextField textField;
 
@@ -67,18 +67,22 @@ public class Base4Panel extends JPanel implements ActionListener {
 		
 		plus = new JButton("+"); 
 		plus.addActionListener(this);
+		equals.setActionCommand("sum");
 		add(plus, "cell 5 4,alignx left,aligny top");
 
 		divide = new JButton("/"); 
 		divide.addActionListener(this);
+		equals.setActionCommand("divide");
 		add(divide, "cell 3 5,alignx left,aligny top");
 		
 		minus = new JButton("-"); 
 		minus.addActionListener(this);
+		equals.setActionCommand("subtract");
 		add(minus, "cell 4 5,alignx left,aligny top");
 		
 		multiply = new JButton("x"); 
 		multiply.addActionListener(this);
+		equals.setActionCommand("multi");
 		add(multiply, "cell 5 5,alignx left,aligny top");
 		
 	
@@ -126,6 +130,25 @@ public class Base4Panel extends JPanel implements ActionListener {
 		if (click.getSource() == equals)
 		{
 			inputB =textField.getText();
+			
+			switch(function)
+								
+			case "sum":
+				result = calc.sum();
+				break;
+				
+			case "divide":
+				result = calc.divide();
+				break;
+				
+			case "multi":
+				result = calc.multiply();
+				break;
+				
+			case "sub":
+				result = calc.subtract()
+				break;
+				
 			
 			textField.setText(result);
 			
