@@ -7,14 +7,14 @@ import java.util.ArrayList;
 
 public class Base4Panel extends JPanel implements ActionListener {
 	private Base4Calc calc; // this object will actually do the calculating work
-	private ArrayList<String> arr = new ArrayList<String>();
+	private ArrayList<JButton> arr = new ArrayList();
 	
 	JButton zero, 
 	one, 
 	two, 
 	three,
-
-	//four,five,six,seven,eight,nine,ten,eleven,twelve,thirtn,fourtn,fiftn,sixtn
+	
+		//+four,five,six,seven,eight,nine,ten,eleven,twelve,thirtn,fourtn,fiftn,sixtn
 	
 	plus, 
 	minus, 
@@ -24,13 +24,10 @@ public class Base4Panel extends JPanel implements ActionListener {
 	clear;
 	
 	String lastOp="";
-
-	
-	
-	
 	String inputA="0",
 			inputB="0",
-			result="0";
+			result="0",
+			current="0";
 	
 	
 	private int base4=4;
@@ -39,7 +36,7 @@ public class Base4Panel extends JPanel implements ActionListener {
 	Base4Panel() {
 		setLayout(new MigLayout("", "[45px][39px][41px][grow][39px][41px][41px][41px][-89.00px][69px]", "[29px][][][][][][]"));
 		
-	
+		ActionListener operand = new opListener();//need to check the syntax here
 		
 		textField = new JTextField();
 		add(textField, "cell 3 2 3 1,growx");
@@ -48,88 +45,64 @@ public class Base4Panel extends JPanel implements ActionListener {
 		zero = new JButton("0"); 
 		zero.addActionListener(this);
 		add(zero, "cell 3 3,alignx left,aligny top");
+		arr.add(zero); //add button to ArrayList arr for later
 		
 		one = new JButton("1");
 		one.addActionListener(this);
 		add(one, "cell 4 3,alignx left,aligny top");
+		arr.add(one);
+		
 		
 		two = new JButton("2"); 
 		two.addActionListener(this);
 		add(two, "cell 3 4,alignx left,aligny top");
+		arr.add(two);
+		
 		
 		three = new JButton("3"); 
 		three.addActionListener(this);	
 		add(three, "cell 4 4,alignx left,aligny top");
+		arr.add(three);
 		
 		
+		//creation of operand buttons
 		clear = new JButton("C");
-		clear.addActionListener(this);
+		clear.addActionListener(operand);
 		add(clear, "cell 5 3,alignx left,aligny top");
 		
-	
-		
-		
+			
 		plus = new JButton("+"); 
-		plus.addActionListener(this);
+		plus.addActionListener(operand);
 		add(plus, "cell 5 4,alignx left,aligny top");
 
 		divide = new JButton("/"); 
-		divide.addActionListener(this);
+		divide.addActionListener(operand);
 		//divide.setActionCommand("divide");
 		add(divide, "cell 3 5,alignx left,aligny top");
 		
 		minus = new JButton("-"); 
-		minus.addActionListener(this);
+		minus.addActionListener(operand);
 		//minus.setActionCommand("subtract");
 		add(minus, "cell 4 5,alignx left,aligny top");
 		
 		multiply = new JButton("x"); 
-		multiply.addActionListener(this);
+		multiply.addActionListener(operand);
+		//multiply.addActionListener(this);
 		//multiply.setActionCommand("multi");
 		add(multiply, "cell 5 5,alignx left,aligny top");
 		
 		
 		equals = new JButton("=");
-		equals.addActionListener(new ActionListener(){
-				public void actionPerformed (ActionEvent e)
-				{
-					inputB =textField.getText();
-					
-					switch(e.getActionCommand())
-										
-					case "+":
-						result = calc.sum(inputA, inputB);
-						break;
-						
-					case "/":
-						result = calc.divide(inputA, inputB);
-						break;
-					case "-":
-						result = calc.subtract(inputA, inputB);
-						break;
-									
-					case "*":
-						result = calc.multiply(inputA, inputB);
-						break;
-				}
-		}
-		);
-			
-		
+		equals.addActionListener(operand);
 		add(equals, "cell 8 5,alignx left,aligny top");
 		
 	
-
-		// you may decide you want to improve the appearance of the layout, 
-		// which is fine. But defer that until you get the calculator working. 
-		// (You can spend HOURS messing with layout, which is not the point of this exercise!)
-
 
 	}
 	
 	public void actionPerformed(ActionEvent click)
 	{
-		
+	
 		if (click.getSource() == zero)
 			textField.setText(textField.getText().concat("0"));
 		if (click.getSource() == one)
@@ -139,55 +112,116 @@ public class Base4Panel extends JPanel implements ActionListener {
 		if (click.getSource() == three )
 			textField.setText(textField.getText().concat("3"));
 		if (click.getSource() == clear )
-			textField.setText("");
-		
-		
-		
-		if (click.getSource() == plus)
-			readIn(); 
-			lastOp =click.getActionCommand();
-		if (click.getSource() == minus)
-			readIn();
-		lastOp =click.getActionCommand();
-		if (click.getSource() == multiply)
-			readIn();
-		if (click.getSource() == divide)
-			readIn();
-		
+			   {
+					 textField.setText("");
+			     calc.clear(); //check to see if this line is actually needed
+			  }
+				
+	
 	}
-	
-	
-	
 		
-			print();		
-		}	
-		
-
-		
-		
-	
 	
 	public void readIn() 
 	{
 		inputA =textField.getText();
-		arr.add(inputA);
-		textField.setText("");
-		
-		
+		stateCheck();//check to make sure this is the right spot
+		textField.setText("");		
 	}
+	
 	public void print()
 	{
 		textField.setText(result);
-		
 	}
 	
-		
-	// you need to deal with event handling. before you go too crazy writing code, 
-	// think about when the calc object needs to be involved, and when it doesn't 
-			//calc needs to be involved  when an operand button is clicked
-			//may or may not be needed when a num button is pressed
-			//need 2 string objects
+	public void stateCheck()
+	{
+		if (current == "0")
+			current = inputA; 
+	}
 	
-	//need to handle exceptions as well as output problem
-	//every even num of terms need to be processing and outputting results
-}
+	public void clear()
+	{
+		//this method may need to be moved here instead of in calc logic
+	}
+		
+		
+	class opListener implements ActionListener
+		{
+		 public void actionPerformed (ActionEvent e)
+			{
+					
+				readIn();
+				inputB =textField.getText();
+					
+          if(e.getActionCommand()== "+")
+				
+						result = calc.sum(current, inputB);
+					            
+					if(e.getActionCommand()== "/")
+						result = calc.divide(current, inputB);
+				
+	        if(e.getActionCommand()== "-")
+						result = calc.subtract(current, inputB);
+				
+        if(e.getActionCommand()== "*")
+						result = calc.multiply(current, inputB);
+						
+				
+				
+				
+				
+				
+				
+		
+			
+				
+				/*
+				inputB =textField.getText();
+						switch(e.getActionCommand())
+				{
+				case "+":
+					result = calc.sum(current, inputB);
+						print();
+					break;
+					
+				case "/":
+					result = calc.divide(current, inputB);
+					print();
+						break;
+				case "-":
+					result = calc.subtract(current, inputB);
+					print();
+						break;
+								
+				case "*":
+					result = calc.multiply(current, inputB);
+					print();
+						break;
+						
+				default: 
+						print();//may not actually need this here
+				
+				
+				*/
+				
+				
+				
+				}
+				//print();	
+				
+		}
+	}
+/*
+
+	need to think about exception handling
+			what can go wrong
+			where is it likely to go wrong
+			how can we prevent it from going wrong
+
+
+
+
+
+*/
+
+
