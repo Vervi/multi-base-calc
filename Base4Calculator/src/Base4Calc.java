@@ -5,13 +5,13 @@ public class Base4Calc {
 	private int x,y,z;
 	int base=4;
     private int base10= 10;
-	private String A;
-	private String B;
+	private String A= "0";
+	private String B="0";
 	private String input = "0";
 
 	String result="0";//default string output
 	String current="0";//tracker for current total
-  ArrayList<Integer> terms;// for expansion
+	ArrayList<Integer> terms;// for expansion
 	
 	
 	
@@ -26,6 +26,12 @@ public class Base4Calc {
 	void setBase(int b)
 	{
 		base = b;
+	}
+	
+	void setString (String A, String B)
+	{
+		A=this.A;
+		B=this.B;
 	}
 	
 /**
@@ -58,6 +64,7 @@ String base10out(String s)
 	
 String sum(String A, String B)//for now focusing just on 2 values
 {	
+	setString(A,B);
 	x = Integer.parseInt(base10in(A));
 	y = Integer.parseInt(base10in(B));
 	z = x+y; 
