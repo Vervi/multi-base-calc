@@ -8,7 +8,7 @@ public class Base4Calc {
 	private String A= "0";
 	private String B="0";
 	private String input = "0";
-
+	
 	String result="0";//default string output
 	String current="0";//tracker for current total
 	ArrayList<Integer> terms;// for expansion
@@ -17,7 +17,7 @@ public class Base4Calc {
 	
 	Base4Calc() { result="0"; }
 	
-	void clear() { result="0"; }
+	//void clear() { result="0"; }
 
 /**
 	*	method: setBase takes an int parameter and sets the current base to that value when called
@@ -76,13 +76,13 @@ String sum(String A, String B)//for now focusing just on 2 values
 //works
 
 
-String divide(String A, String B)//for now focusing just on 2 values
+String divide(String A)//for now focusing just on 2 values
 {	
-	x = Integer.parseInt(base10in(A));
-	y = Integer.parseInt(base10in(B));
+	y = Integer.parseInt(base10in(A));
+	x = Integer.parseInt(base10in(current));
 	z = x/y; 
 	result=base10out(Integer.toString(z));
-	//System.out.println(result);
+	System.out.println(result);
 	return result;
 }
 //works
@@ -107,6 +107,11 @@ String subtract(String A, String B)
 	return result;
 }
 //works
+
+void setCurr(String A)
+{
+	current = A;
+}
 	
   
   

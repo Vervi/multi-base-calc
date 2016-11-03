@@ -45,6 +45,7 @@ public class Base4Panel extends JPanel implements ActionListener{
 	String current="0";
 	
 	private int count =0;
+	private boolean numExpected = true;
 	
 	Base4Panel() {
 		setLayout(new MigLayout("", "[grow][][39px][41px][grow][39px][41px][25.00px][41px][-89.00px][69px]", "[29px][][53.00][33.00,grow][][][33.00][][]"));
@@ -94,44 +95,62 @@ public class Base4Panel extends JPanel implements ActionListener{
 		
 		four = new JButton("4");
 		add(four, "cell 3 4,aligny center");
+		four.setEnabled(false);
 		
 		five = new JButton("5");
 		add(five, "cell 4 4,aligny center");
+		five.setEnabled(false);
 		
 		six = new JButton("6");
 		add(six, "cell 5 4,aligny center");
+		six.setEnabled(false);
 		
 		seven = new JButton("7");
 		add(seven, "cell 6 4,aligny center");
+		seven.setEnabled(false);
 		
 		eight = new JButton("8");
 		add(eight, "cell 3 5,aligny center");
+		eight.setEnabled(false);
 		
 		nine = new JButton("9");
 		add(nine, "cell 4 5,aligny center");
+		nine.setEnabled(false);
 		
 		ten = new JButton("A");
 		add(ten, "cell 5 5,aligny center");
+		ten.setEnabled(false);
 		
 		elvn = new JButton("B");
 		add(elvn, "cell 6 5,aligny center");
+		elvn.setEnabled(false);
 		
 		twelve = new JButton("C");
 		add(twelve, "cell 3 6,aligny center");
+		twelve.setEnabled(false);
 		
 		thrtn = new JButton("D");
 		add(thrtn, "cell 4 6,aligny center");
+		thrtn.setEnabled(false);
 		
 		fourtn = new JButton("E");
 		add(fourtn, "cell 5 6,aligny center");
+		fourtn.setEnabled(false);
 		
 		fiftn = new JButton("F");
 		add(fiftn, "cell 6 6,aligny center");
-			
+		fiftn.setEnabled(false);
+		
 		
 		//creation of operand buttons
-				clear = new JButton("C");
-				clear.addActionListener(this);
+				clear = new JButton("C");//clear button gets its own listener
+				clear.addActionListener(new ActionListener(){
+						public void actionPerformed (ActionEvent c)
+							{
+							clear();
+							}
+						}
+						);
 				add(clear, "cell 8 2,alignx center,aligny center");
 			
 				plus = new JButton("+"); 
@@ -161,34 +180,22 @@ public class Base4Panel extends JPanel implements ActionListener{
 	
 	}
 
-	
-	public void print()
-	{
-		if(result =="0")
-		{readIn();}
-		textField.setText(result);
-	}
-	
-	public void stateCheck()
-	{
-		if (current == "0")
-			current = inputA; 
-		if(result == "0")
-			result= inputA;
-		else
-			{current = result;}//need to seriously check the results of just this line
-	}
-	
 	public void clear()
 	{
-		//this method may need to be moved here instead of in calc logic
+		
+		 textField.setText("");
+		 count = 0;
+		 current ="0";
+		 //result ="0";
+		 numExpected = true;
+		 
 	}
 		
 	 class numListener implements ActionListener
 	{
 		public void actionPerformed (ActionEvent click)
 		{
-			
+			/*
 			if (click.getSource() == zero)
 				textField.setText(textField.getText().concat("0"));
 			if (click.getSource() == one)
@@ -198,79 +205,110 @@ public class Base4Panel extends JPanel implements ActionListener{
 			if (click.getSource() == three )
 				textField.setText(textField.getText().concat("3"));
 			
+			need a more efficient way to handle this once other num buttons are added
+				*/
+			String numInput =click.getActionCommand();
+			if (numExpected)
+			{
+				textField.setText(numInput);
+				numExpected = false;
+			}
+			else
+			{
+				textField.setText(textField.getText().concat(numInput));
+			}
+			}
+			//works and is a helluva lot more concise
 		}
-	}
-		
-	 
-
+	
 		public void readIn() 
 		{
 			inputA =textField.getText();
-			stateCheck();//check to make sure this is the right spot
-			textField.setText("");
-			count++;
+		//textField.setText("");
+			count++;//will need for stack/rpn/tape fns later
 		}
+		
+		public void stateCheck()
+		{
+			if (current == "0")
+				current = inputA; 
+			if(result == "0")
+				result= inputA;
+			else
+				{current = result;}//need to seriously check the results of just this line
+		}
+		
+		public void print()
+		{
+			//if(result =="0")
+			//readIn();
+			textField.setText(result);
+		}
+		
+		//need to rethink the logic here
+		/* let's say we enter a number 12321
+		 * 				the pressing of an operation key will say hey we're done entering the number
+		 * 				in which case the following needs to happen (assuming there are no numbers on the stack)
+		 * 					capture the number on display and store it in a string variable
+		 * 					set the last operand to whichever button was pushed
+		 * 					if equal was pushed current & result should be set to whatever was read in
+		 * 					if a different button was pressed another number needs to be read in after
+		 * 					everytime a number is read in the new total should be displayed 
+		 * 
+		 * 		 */
+		
+		
+		
 	//class opListener implements ActionListener
 		//{
 		 public void actionPerformed (ActionEvent e)
 			{
-									
-      /*
-    	if (e.getSource() == plus)
-    	{
-    		readIn();
-    		//inputB =textField.getText();
-			result = calc.sum(current, inputB);
-		//	lastOp =
-			if (count >= 2)
-				result = calc.sum(current, inputB);
-			else if (count == 0)
-			{
+			 	if (numExpected)
+			 	{
+			 		clear();
+			 		textField.setText("oops trying entering a number.");
+			 	}
+			 	else
+			 	{
+			 numExpected = true;
+			 try{
+				readIn();
+				 
+				 		 
+				 if (lastOp.equals( "=" ))
+				 {
+				 calc.setCurr(inputA);
+				 }
+				 else if (lastOp.equals("/"))
+				 {
+				 	
+				 result= calc.divide(inputA);
+				 	
+				 }
+				 if (lastOp.equals( "+" ))
+				 {
+				 calc.sum(current, inputA);
+				 }
+				 
+				 
+
+				 else
+			
+					 inputB ="this is soooo not working";
+			 }
+			catch(Exception oops) 
+			 {
+				clear();
+				textField.setText("Oops! I didn't catch that.");	
+			 }
+			lastOp = e.getActionCommand();
+			 	
 			
 			}
-    	}
-    	if (e.getSource() == minus)
-    		readIn();
-			result = calc.subtract(current, inputA);
-		   //	lastOp =
-		
-    	if (e.getSource() == multiply)
-			result = calc.multiply(current, inputB);
-			*/
-    	if (e.getSource() == divide)
-	    result = calc.divide(current, inputB);
-		
-    	if (e.getSource() == equals)
-    	    print();
-    	
-    	if (e.getSource() == clear )
-		{
-		 textField.setText("");
-		 count = 0;
-		 current ="0";
-		 result ="0";
-		 //works probably	
-		}
-			
-			
-			
-			
-			
-			
-			}
-		 
+			 	}
 
 						
-		}
-	//}
-/*
+			
 
-	need to think about exception handling
-			what can go wrong
-			where is it likely to go wrong
-			how can we prevent it from going wrong
-
-
-*/
-
+}
 
