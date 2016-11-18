@@ -2,13 +2,14 @@ import java.awt.FlowLayout;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.event.*;
 import net.miginfocom.swing.MigLayout;
 import java.util.ArrayList;
 
-public class Base4Panel extends JPanel implements ActionListener{
+public class Base4Panel extends JPanel {
 	private Base4Calc calc; // this object will actually do the calculating work
-	private ArrayList<JButton> num = new ArrayList<JButton>(); //using ArrayList so we don't have to make too many changes for expansions
-	private ArrayList<JButton> op = new ArrayList<JButton>();
+//	private ArrayList<JButton> num = new ArrayList<JButton>(); //
+//	private ArrayList<JButton> op = new ArrayList<JButton>();// 
 	
 	
 	private JButton zero;
@@ -44,20 +45,22 @@ public class Base4Panel extends JPanel implements ActionListener{
 	String result="0";
 	String current="0";
 	
-	private int count =0;
+//	private int count =0;
 	private boolean numExpected = true;
 	
 	Base4Panel() {
+		
+		calc = new Base4Calc();
 		setLayout(new MigLayout("", "[grow][][39px][41px][grow][39px][41px][25.00px][41px][-89.00px][69px]", "[29px][][53.00][33.00,grow][][][33.00][][]"));
 		
-	//	ActionListener operand = new opListener();//need to check the syntax here
+		ActionListener operand = new opListener();//need to check the syntax here
 		ActionListener digit = new numListener();
+		ActionListener clr = new freshListener();
 		
 		zero = new JButton("0"); 
 		zero.addActionListener(digit);
 		add(zero, "cell 3 3,alignx left,aligny center");
-		num.add(zero); 
-		
+				
 		slider = new JSlider();
 		slider.setMinorTickSpacing(1);
 		slider.setSnapToTicks(true);
@@ -65,6 +68,29 @@ public class Base4Panel extends JPanel implements ActionListener{
 		slider.setMajorTickSpacing(2);
 		slider.setMinimum(2);
 		slider.setMaximum(16);
+			slider.addChangeListener(new ChangeListener() {
+			     public void stateChanged(ChangeEvent e) {
+			    JSlider source = (JSlider)e.getSource();
+			      if (!source.getValueIsAdjusting())
+			      {
+			    	//recall button de/activation needs to go here as well 
+			      if (slider.getValue()==2)
+			    	  calc.setBase(2);
+			      else if(slider.getValue()==3)
+			      calc.setBase(3);
+			      else if(slider.getValue()==4)
+			      {	 calc.setBase(4); 
+			      System.out.print("calculating in b4");
+			      }
+			     			      
+			      else if(slider.getValue()==16)
+						 calc.setBase(16);
+			      }
+			     } 
+			    });
+				
+				
+				
 		slider.setOrientation(SwingConstants.VERTICAL);
 		add(slider, "cell 0 2 2 5");
 		
@@ -78,19 +104,18 @@ public class Base4Panel extends JPanel implements ActionListener{
 		one = new JButton("1");
 		one.addActionListener(digit);
 		add(one, "cell 4 3,alignx left,aligny center");
-		num.add(one);
+	
 		
 		
 		two = new JButton("2"); 
 		two.addActionListener(digit);
 		add(two, "cell 5 3,alignx left,aligny center");
-		num.add(two);
 		
 		
 		three = new JButton("3"); 
 		three.addActionListener(digit);	
 		add(three, "cell 6 3,alignx left,aligny center");
-		num.add(three);
+		
 		
 		
 		four = new JButton("4");
@@ -144,69 +169,42 @@ public class Base4Panel extends JPanel implements ActionListener{
 		
 		//creation of operand buttons
 				clear = new JButton("C");//clear button gets its own listener
-				clear.addActionListener(new ActionListener(){
-						public void actionPerformed (ActionEvent c)
-							{
-							clear();
-							}
-						}
-						);
+				clear.addActionListener(clr);
 				add(clear, "cell 8 2,alignx center,aligny center");
 			
 				plus = new JButton("+"); 
-				plus.addActionListener(this);
+				plus.addActionListener(operand);
 				add(plus, "cell 8 3,alignx left,aligny center");
-				op.add(plus);
+				
 				
 				minus = new JButton("-"); 
-				minus.addActionListener(this);
+				minus.addActionListener(operand);
 				add(minus, "cell 8 4,alignx left,aligny center");
-				op.add(minus);
+				
 				
 				multiply = new JButton("x"); 
-				multiply.addActionListener(this);
+				multiply.addActionListener(operand);
 				add(multiply, "cell 8 5,alignx left,aligny center");
-				op.add(multiply);
+			
 				
 				divide = new JButton("/"); 
-				divide.addActionListener(this);
+				divide.addActionListener(operand);
 				add(divide, "cell 8 6,alignx left,aligny center");
-				op.add(divide);
+				
 				
 				equals = new JButton("=");
-				equals.addActionListener(this);
+				equals.addActionListener(operand);
 				add(equals, "cell 5 7,alignx left,aligny center");
-				op.add(equals);
+			
 	
 	}
 
-	public void clear()
-	{
-		
-		 textField.setText("");
-		 count = 0;
-		 current ="0";
-		 //result ="0";
-		 numExpected = true;
-		 
-	}
+
 		
 	 class numListener implements ActionListener
 	{
 		public void actionPerformed (ActionEvent click)
 		{
-			/*
-			if (click.getSource() == zero)
-				textField.setText(textField.getText().concat("0"));
-			if (click.getSource() == one)
-				textField.setText(textField.getText().concat("1"));
-			if (click.getSource() == two)
-				textField.setText(textField.getText().concat("2"));
-			if (click.getSource() == three )
-				textField.setText(textField.getText().concat("3"));
-			
-			need a more efficient way to handle this once other num buttons are added
-				*/
 			String numInput =click.getActionCommand();
 			if (numExpected)
 			{
@@ -218,49 +216,33 @@ public class Base4Panel extends JPanel implements ActionListener{
 				textField.setText(textField.getText().concat(numInput));
 			}
 			}
-			//works and is a helluva lot more concise
 		}
 	
-		public void readIn() 
+				public void clear()
 		{
-			inputA =textField.getText();
-		//textField.setText("");
-			count++;//will need for stack/rpn/tape fns later
+			
+			 textField.setText("");
+			 current ="0";
+			 numExpected = true;
+			// count = 0;
 		}
-		
-		public void stateCheck()
-		{
-			if (current == "0")
-				current = inputA; 
-			if(result == "0")
-				result= inputA;
-			else
-				{current = result;}//need to seriously check the results of just this line
-		}
-		
 		public void print()
 		{
 			//if(result =="0")
 			//readIn();
-			textField.setText(result);
+			current = calc.equate();
+			textField.setText(current);
 		}
 		
-		//need to rethink the logic here
-		/* let's say we enter a number 12321
-		 * 				the pressing of an operation key will say hey we're done entering the number
-		 * 				in which case the following needs to happen (assuming there are no numbers on the stack)
-		 * 					capture the number on display and store it in a string variable
-		 * 					set the last operand to whichever button was pushed
-		 * 					if equal was pushed current & result should be set to whatever was read in
-		 * 					if a different button was pressed another number needs to be read in after
-		 * 					everytime a number is read in the new total should be displayed 
-		 * 
-		 * 		 */
+		public void readIn() 
+		{
+			inputA =textField.getText();
+		//textField.setText("");
+		//	count++;//will need for stack/rpn/tape fns later
+		}
 		
-		
-		
-	//class opListener implements ActionListener
-		//{
+	class opListener implements ActionListener
+		{
 		 public void actionPerformed (ActionEvent e)
 			{
 			 	if (numExpected)
@@ -272,29 +254,31 @@ public class Base4Panel extends JPanel implements ActionListener{
 			 	{
 			 numExpected = true;
 			 try{
-				readIn();
-				 
+				 inputA =textField.getText();
 				 		 
 				 if (lastOp.equals( "=" ))
 				 {
-				 calc.setCurr(inputA);
+				calc.equate();
 				 }
 				 else if (lastOp.equals("/"))
+				 {				 	
+					 calc.divide(current, inputA);
+				  }
+				 else if (lastOp.equals( "+" ))
 				 {
-				 	
-				 result= calc.divide(inputA);
-				 	
+					 calc.sum(current, inputA);
 				 }
-				 if (lastOp.equals( "+" ))
+				 else if (lastOp.equals( "-" ))
 				 {
-				 calc.sum(current, inputA);
+					calc.subtract(current, inputA);
+				 }
+				 else  if (lastOp.equals( "*" ))
+				 {
+					calc.multiply(current, inputA);
 				 }
 				 
+				 print();
 				 
-
-				 else
-			
-					 inputB ="this is soooo not working";
 			 }
 			catch(Exception oops) 
 			 {
@@ -307,8 +291,18 @@ public class Base4Panel extends JPanel implements ActionListener{
 			}
 			 	}
 
-						
-			
-
+			}// end of oplistener decl
+		 
+		 
+		 class freshListener implements ActionListener
+		 {
+			 public void actionPerformed (ActionEvent c)
+			 {
+				 clear();
+			 }
+		 }
+		 
+		 
+		
 }
 
