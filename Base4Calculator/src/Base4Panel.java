@@ -42,11 +42,8 @@ public class Base4Panel extends JPanel {
 	
 	String lastOp="=";
 	String inputA="0";
-	String inputB="0";
-	String result="0";
 	String current="0";
 	
-//	private int count =0;
 	private boolean numExpected = true;
 	private JLabel b_note;
 	
@@ -163,7 +160,7 @@ public class Base4Panel extends JPanel {
 				add(minus, "cell 8 4,alignx left,aligny center");
 				
 				
-				multiply = new JButton("x"); 
+				multiply = new JButton("*"); 
 				multiply.addActionListener(operand);
 				add(multiply, "cell 8 5,alignx left,aligny center");
 			
@@ -223,7 +220,7 @@ public class Base4Panel extends JPanel {
 					      else if(slider.getValue()==4)
 					      {
 					    	  calc.setBase(4);
-					    	  b_note.setText("calculating in base ");
+					    	  b_note.setText("calculating in base 4");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<4)
 					    		  (num.get(i)).setEnabled(true);
@@ -377,7 +374,6 @@ public class Base4Panel extends JPanel {
 					     } 
 					    });
 						
-						
 				slider.setOrientation(SwingConstants.VERTICAL);
 				add(slider, "cell 0 2 2 5");
 			
@@ -413,8 +409,6 @@ public class Base4Panel extends JPanel {
 		}
 		public void print()
 		{
-			//if(result =="0")
-			//readIn();
 			current = calc.equate();
 			textField.setText(current);
 		}
@@ -430,7 +424,9 @@ public class Base4Panel extends JPanel {
 			{
 			 	if (numExpected)
 			 	{
-			 		clear();
+			 		//clear();
+			 		textField.setText("");
+			 		calc.clear();
 			 		textField.setText("oops trying entering a number.");
 			 	}
 			 	else
@@ -441,11 +437,11 @@ public class Base4Panel extends JPanel {
 				 		 
 				 if (lastOp.equals( "=" ))
 				 {
-				calc.equate();
+				calc.setCurr(inputA);
 				 }
 				 else if (lastOp.equals("/"))
 				 {				 	
-					 calc.divide(current, inputA);
+					 calc.divide(inputA);
 				  }
 				 else if (lastOp.equals( "+" ))
 				 {
@@ -453,21 +449,33 @@ public class Base4Panel extends JPanel {
 				 }
 				 else if (lastOp.equals( "-" ))
 				 {
-					calc.subtract(current, inputA);
+					calc.subtract(inputA);
 				 }
 				 else  if (lastOp.equals( "*" ))
 				 {
-					calc.multiply(current, inputA);
+					calc.multiply(inputA);
 				 }
 				 
 				 print();
 				 
 			 }
-			catch(Exception oops) 
+			catch(ArithmeticException oops) 
 			 {
 				clear();
 				calc.clear();
-				textField.setText("Oops! I didn't catch that.");	
+				textField.setText("Not sure that's legal...");	
+			 }
+			 catch(NullPointerException nullie) //debug usage
+			 {
+				clear();
+				calc.clear();
+				textField.setText("I seem to be losing my faculties...");	
+			 }
+			 catch(Exception ex)
+			 {
+				 clear();
+					calc.clear();
+					textField.setText("Let's try that again..."); 
 			 }
 			lastOp = e.getActionCommand();
 			 	

@@ -61,17 +61,13 @@ public String equate()
 return "" +result; //int as a string
 	
 } 
+
+void setCurr(String A)
+{
+	output =  Integer.parseInt(A,base);
+}
 void sum(String A)//for now focusing just on 2 values
 {	
-	/*
-	x = Integer.parseInt(base10in(A));
-	y = Integer.parseInt(base10in(B));
-	z = x+y; 
-	
-	result=base10out(Integer.toString(z));
-	//	System.out.println(result);
-	//return result;
-	 */
 	output += base10in(A);
 	result = Integer.toString(output);
 	output = base10out(result);
@@ -79,93 +75,25 @@ void sum(String A)//for now focusing just on 2 values
 //works
 
 
-void divide(String A, String B)//for now focusing just on 2 values
-{	/*
-	x = Integer.parseInt(base10in(A));
-	y = Integer.parseInt(base10in(B));
-	z = x/y; 
-	result=base10out(Integer.toString(z));
-	*/
+void divide(String A)//for now focusing just on 2 values
+{	
+	output /= base10in(A);
+	result = Integer.toString(output);
+	output = base10out(result);
 }
 //works
 
-void multiply(String A, String B)//for now focusing just on 2 values
-{	/*
-	x = Integer.parseInt(base10in(A));
-	y = Integer.parseInt(base10in(B));
-	z = x*y; 
-	result=base10out(Integer.toString(z));
-//	System.out.println(result);
-	//return result;
-	  
-	  
-	 */
+void multiply(String A)//for now focusing just on 2 values
+{	
+	output *= base10in(A);
+	result = Integer.toString(output);
+	output = base10out(result);
 }
 //works
-void subtract (String A, String B)
-{/*
-	x = Integer.parseInt(base10in(A));
-	y = Integer.parseInt(base10in(B));
-	z = x-y; 
-    result=base10out(Integer.toString(z));
-	System.out.println(result);
-	 //return result;
-	  * 
-	  */
-}	
-/*void sum (String A)//for now focusing just on 2 values
+void subtract (String A)
 {
-	 current = base10in(Integer.toString(result)); //take current total & convert to base 10 for summation
-	 result = (Integer.parseInt(base10in(current))) +( Integer.parseInt(base10in(A)));
-	current=base10out(Integer.toString(result));
-	//return result;
+	output -= base10in(A);
+	result = Integer.toString(output);
+	output = base10out(result);
 }
-//works
-
-void sum(String A)//for now focusing just on 2 values
-{	
-	current = base10in(Integer.toString(result));
-	x = Integer.parseInt(base10in(A));
-	y = Integer.parseInt(base10in(current));
-	z = x+y; 
-		
-	result=Integer.parseInt(base10out(Integer.toString(z)));
-	System.out.println(result);
-	//return result;
-}
-
-void divide (String A)//for now focusing just on 2 values
-{	
-	y = Integer.parseInt(base10in(A));
-	x = Integer.parseInt(base10in(current));
-	result = x/y; 
-	//result=base10out(Integer.toString(z));
-	System.out.println(result);
-//	return result;
-}
-//works
-
-void multiply(String A, String B)//for now focusing just on 2 values
-{	
-	x = Integer.parseInt(base10in(A));
-	y = Integer.parseInt(base10in(B));
-	z = x*y; 
-	//result=base10out(Integer.toString(z));
-//	System.out.println(result);
-	//return result;
-}
-//works
-void subtract(String A, String B)
-{	
-	x = Integer.parseInt(base10in(A));
-	y = Integer.parseInt(base10in(B));
-	z = x-y; 
-    //result=base10out(Integer.toString(z));
-	System.out.println(result);
-//	return result;
-}
-//works
-*/
-
- 
 }
