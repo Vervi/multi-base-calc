@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Base4Calc {
 	private int x,y,z;
-	int base=4;
+	int base=10;//default base is 10 for testing purposes
     private int base10= 10;
 	private String input = "0";
 	

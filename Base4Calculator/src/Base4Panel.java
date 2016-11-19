@@ -48,15 +48,20 @@ public class Base4Panel extends JPanel {
 	
 //	private int count =0;
 	private boolean numExpected = true;
+	private JLabel b_note;
 	
 	Base4Panel() {
 		
 		calc = new Base4Calc();
-		setLayout(new MigLayout("", "[grow][][39px][41px][grow][39px][41px][25.00px][41px][-89.00px][69px]", "[29px][][53.00][33.00,grow][][][33.00][][]"));
+		setLayout(new MigLayout("", "[grow][][39px][41px,grow][grow][39px][41px][25.00px][41px][-89.00px][69px]", "[29px][][53.00][33.00,grow][][][33.00][][]"));
 		
 		ActionListener operand = new opListener();//need to check the syntax here
 		ActionListener digit = new numListener();
 		ActionListener clr = new freshListener();
+		
+		b_note = new JLabel();
+		add(b_note, "cell 3 1 4 1,growx");
+		b_note.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		zero = new JButton("0"); 
 		add(zero, "cell 3 3,alignx left,aligny center");
@@ -181,7 +186,12 @@ public class Base4Panel extends JPanel {
 				slider.setMajorTickSpacing(2);
 				slider.setMinimum(2);
 				slider.setMaximum(16);
-					slider.addChangeListener(new ChangeListener() {
+				
+				//TESTING PURPOSES NEEDS TO BE SWITCHED BACK TO 16 ONCE MATH LOGIC FUNCTIONS NORMALLY AGAIN
+				slider.setValue(10);//set default value to calculate in base 10
+				b_note.setText("calculating in base 10");
+				
+				slider.addChangeListener(new ChangeListener() {
 					     public void stateChanged(ChangeEvent e) {
 					    JSlider source = (JSlider)e.getSource();
 					      if (!source.getValueIsAdjusting())
@@ -190,7 +200,7 @@ public class Base4Panel extends JPanel {
 					      if (slider.getValue()==2)
 					      {
 					    	  calc.setBase(2);
-					    	  System.out.print("calculating in base 2");
+					    	  b_note.setText("calculating in base 2");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<2)
 					    		  (num.get(i)).setEnabled(true);
@@ -201,7 +211,7 @@ public class Base4Panel extends JPanel {
 					      else if(slider.getValue()==3)
 					      {
 					    	  calc.setBase(3);
-					    	  System.out.print("calculating in base 3");
+					    	  b_note.setText("calculating in base 3");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<3)
 					    		  (num.get(i)).setEnabled(true);
@@ -213,7 +223,7 @@ public class Base4Panel extends JPanel {
 					      else if(slider.getValue()==4)
 					      {
 					    	  calc.setBase(4);
-					    	  System.out.print("calculating in base ");
+					    	  b_note.setText("calculating in base ");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<4)
 					    		  (num.get(i)).setEnabled(true);
@@ -225,7 +235,7 @@ public class Base4Panel extends JPanel {
 					      if (slider.getValue()==5)
 					      {
 					    	  calc.setBase(5);
-					    	  System.out.print("calculating in base 5");
+					    	  b_note.setText("calculating in base 5");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<5)
 					    		  (num.get(i)).setEnabled(true);
@@ -237,7 +247,7 @@ public class Base4Panel extends JPanel {
 					      if (slider.getValue()==6)
 					      {
 					    	  calc.setBase(6);
-					    	  System.out.print("calculating in base 6");
+					    	  b_note.setText("calculating in base 6");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<6)
 					    		  (num.get(i)).setEnabled(true);
@@ -249,7 +259,7 @@ public class Base4Panel extends JPanel {
 					      if (slider.getValue()==7)
 					      {
 					    	  calc.setBase(7);
-					    	  System.out.print("calculating in base 7");
+					    	  b_note.setText("calculating in base 7");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<7)
 					    		  (num.get(i)).setEnabled(true);
@@ -261,7 +271,7 @@ public class Base4Panel extends JPanel {
 					      if (slider.getValue()==8)
 					      {
 					    	  calc.setBase(8);
-					    	  System.out.print("calculating in base 8");
+					    	  b_note.setText("calculating in base 8");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<8)
 					    		  (num.get(i)).setEnabled(true);
@@ -273,7 +283,7 @@ public class Base4Panel extends JPanel {
 					      if (slider.getValue()==9)
 					      {
 					    	  calc.setBase(9);
-					    	  System.out.print("calculating in base 9");
+					    	  b_note.setText("calculating in base 9");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<9)
 					    		  (num.get(i)).setEnabled(true);
@@ -285,7 +295,7 @@ public class Base4Panel extends JPanel {
 					      else if(slider.getValue()==10)
 					      {
 					    	  calc.setBase(10);
-					    	  System.out.print("calculating in base 10");
+					    	  b_note.setText("calculating in base 10");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<10)
 					    		  (num.get(i)).setEnabled(true);
@@ -296,7 +306,7 @@ public class Base4Panel extends JPanel {
 					      if (slider.getValue()==11)
 					      {
 					    	  calc.setBase(11);
-					    	  System.out.print("calculating in base 11");
+					    	  b_note.setText("calculating in base 11");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<11)
 					    		  (num.get(i)).setEnabled(true);
@@ -308,7 +318,7 @@ public class Base4Panel extends JPanel {
 					      if (slider.getValue()==12)
 					      {
 					    	  calc.setBase(12);
-					    	  System.out.print("calculating in base 12");
+					    	  b_note.setText("calculating in base 12");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<12)
 					    		  (num.get(i)).setEnabled(true);
@@ -320,7 +330,7 @@ public class Base4Panel extends JPanel {
 					      if (slider.getValue()==13)
 					      {
 					    	  calc.setBase(13);
-					    	  System.out.print("calculating in base 13");
+					    	  b_note.setText("calculating in base 13");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<13)
 					    		  (num.get(i)).setEnabled(true);
@@ -332,7 +342,7 @@ public class Base4Panel extends JPanel {
 					      if (slider.getValue()==14)
 					      {
 					    	  calc.setBase(14);
-					    	  System.out.print("calculating in base 14");
+					    	  b_note.setText("calculating in base 14");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<14)
 					    		  (num.get(i)).setEnabled(true);
@@ -344,7 +354,7 @@ public class Base4Panel extends JPanel {
 					      if (slider.getValue()==15)
 					      {
 					    	  calc.setBase(15);
-					    	  System.out.print("calculating in base 15");
+					    	  b_note.setText("calculating in base 15");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<15)
 					    		  (num.get(i)).setEnabled(true);
@@ -355,7 +365,7 @@ public class Base4Panel extends JPanel {
 					      else if(slider.getValue()==16)
 					      {
 					    	  calc.setBase(16);
-					    	  System.out.print("calculating in base 16");
+					    	  b_note.setText("calculating in base 16");
 					    	  for (int i=0; i < num.size(); i++)
 					    		  if (i<16)
 					    		  (num.get(i)).setEnabled(true);
