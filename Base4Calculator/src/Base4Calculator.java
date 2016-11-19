@@ -1,5 +1,18 @@
 import javax.swing.JFrame;
-
+/**
+ * 
+ * Base4Calculator is a multi-base calculator able to perform simple arithmetic operations
+ * in any base including and between 2 and 16. The application is based on three class definitions:
+ * Base4Calc which handles the calculator's logic, Base4Panels which handles the GUI aspects of
+ * the calculator and Base4Calculator which builds the actual calculator using blueprint laid out
+ * by Base4Panel class.
+ * 
+ * @see {@link Base4Calc}
+ * @see {@link Base4Panel}
+ * @version 0.8.9
+ * @author zhi/N. Willis
+ *
+ */
 public class Base4Calculator {
 
 	public static void main(String[] args) {

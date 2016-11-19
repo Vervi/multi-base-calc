@@ -4,13 +4,13 @@ import javax.swing.event.*;
 import net.miginfocom.swing.MigLayout;
 import java.util.ArrayList;
 /**
- * Base4Panel
- * @category gui
- * @author zhi
- * 
- * Base4Panel class lays out the Graphical User Interface component of our Calculator.
- * 
- *
+ ** <p>
+ *	Base4Panel class lays out the Graphical User Interface components of our Calculator.
+ *  Utilizes methods in the Base4Calc class to handle action events.
+ * </>
+ * @see {@link Base4Calc}
+ * @author zhi/N. Willis
+ 
  */
 public class Base4Panel extends JPanel {
 	private Base4Calc calc; // this object will actually do the calculating work

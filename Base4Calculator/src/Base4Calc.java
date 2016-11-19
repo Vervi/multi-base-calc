@@ -1,7 +1,7 @@
 
 /**
  * Base4Calc class defines the logic behind our calculator. It is responsible for handling base conversions
- * ans mathematical operations.
+ * and mathematical operations.
  * 
 
  * 
