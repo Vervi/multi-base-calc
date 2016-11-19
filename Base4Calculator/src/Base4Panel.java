@@ -508,7 +508,37 @@ public class Base4Panel extends JPanel {
 		{
 		 public void actionPerformed (ActionEvent e)
 			{
-			 	if (numExpected)
+			 	performCalc();
+			 	lastOp = e.getActionCommand();
+
+			}// end of oplistener decl
+		 
+		}
+		 class freshListener implements ActionListener
+		 {
+			 public void actionPerformed (ActionEvent c)
+			 {
+				 if(c.getActionCommand()=="C")
+				 {
+					 textField.setText("");
+					 calc.clear();
+				 }
+				 
+				 if(c.getActionCommand()=="=")
+				 {
+					 if (textField.equals(""))
+					 
+					 //add a state check look for intial/clear condition
+					 //need to create conditions at beg of constructor
+					 
+					 performCalc();
+				 }
+			 }
+		 }
+		 
+		 void performCalc()
+		 {
+			 if (numExpected)
 			 	{
 			 		textField.setText("");
 			 		calc.clear();
@@ -526,10 +556,9 @@ public class Base4Panel extends JPanel {
 				 }
 				 else if (lastOp.equals("/"))
 				 {	
-			
+					 inputA= Integer.toString(calc.base10in(inputA));
 					 calc.divide(inputA);
-					 
-					 
+									 
 				  }
 				 else if (lastOp.equals( "+" ))
 				 {
@@ -540,10 +569,12 @@ public class Base4Panel extends JPanel {
 				 }
 				 else if (lastOp.equals( "-" ))
 				 {
+					 inputA= Integer.toString(calc.base10in(inputA));
 					calc.subtract(inputA);
 				 }
 				 else  if (lastOp.equals( "*" ))
 				 {
+					 inputA= Integer.toString(calc.base10in(inputA));
 					calc.multiply(inputA);
 				 }
 				 
@@ -574,33 +605,13 @@ public class Base4Panel extends JPanel {
 					textField.setText("Let's try that again..."); 
 					ex.printStackTrace();
 			 }
-			lastOp = e.getActionCommand();
+			
 					 	
 			
 			}
 			 	}
-
-			}// end of oplistener decl
-		 
-		 
-		 class freshListener implements ActionListener
-		 {
-			 public void actionPerformed (ActionEvent c)
-			 {
-				 if(c.getActionCommand()=="C")
-				 {
-					 textField.setText("");
-					 calc.clear();
-				 }
-				 
-				 if(c.getActionCommand()=="=")
-				 {
-					 print();
-				 }
-			 }
-		 }
-		 
-		 
+			 
 		
+		 
 }
-
+//}
