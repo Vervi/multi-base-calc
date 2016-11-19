@@ -7,6 +7,7 @@ import javax.swing.JFrame;
  * the calculator and Base4Calculator which builds the actual calculator using blueprint laid out
  * by Base4Panel class.
  * 
+ * 
  * @see {@link Base4Calc}
  * @see {@link Base4Panel}
  * @version 0.8.9

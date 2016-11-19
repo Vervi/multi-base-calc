@@ -200,7 +200,8 @@ public class Base4Panel extends JPanel {
 							
 				equals = new JButton("=");
 				add(equals, "cell 5 7,alignx left,aligny center");
-
+				equals.addActionListener(clr);
+					
 				op = new HashMap<Integer,JButton>(){
 				{	
 				put((KeyEvent.VK_ADD),plus);
@@ -214,9 +215,12 @@ public class Base4Panel extends JPanel {
 				Collection<JButton> opkeys = op.values();
 				for (JButton jb : opkeys ) 
 				{
+					if(!jb.equals(equals))
 					jb.addActionListener(operand);
 				}
-		
+					
+				
+				
 				//add Keyboard Functionality
 				Set<Map.Entry<Integer, JButton>> numSet = num.entrySet();
 				addKeyPress(numSet);
@@ -354,7 +358,7 @@ public class Base4Panel extends JPanel {
 					      
 					      else if(slider.getValue()==10)
 					      {
-					    	  calc.setBase(10);
+					    	  calc.setBase(0xA);
 					    	  b_note.setText("calculating in base 10");
 					    	  for (int i=0; i < numList.size(); i++)
 					    		  if (i<0xA)
@@ -365,7 +369,7 @@ public class Base4Panel extends JPanel {
 					      }
 					      if (slider.getValue()==11)
 					      {
-					    	  calc.setBase(11);
+					    	  calc.setBase(0xb);
 					    	  b_note.setText("calculating in base 11");
 					    	  for (int i=0; i < numList.size(); i++)
 					    		  if (i<0xB)
@@ -377,7 +381,7 @@ public class Base4Panel extends JPanel {
 					      
 					      if (slider.getValue()==12)
 					      {
-					    	  calc.setBase(12);
+					    	  calc.setBase(0xc);
 					    	  b_note.setText("calculating in base 12");
 					    	  for (int i=0; i < numList.size(); i++)
 					    		  if (i<0xC)
@@ -389,7 +393,7 @@ public class Base4Panel extends JPanel {
 					      
 					      if (slider.getValue()==13)
 					      {
-					    	  calc.setBase(13);
+					    	  calc.setBase(0xd);
 					    	  b_note.setText("calculating in base 13");
 					    	  for (int i=0; i < numList.size(); i++)
 					    		  if (i<0xD)
@@ -401,7 +405,7 @@ public class Base4Panel extends JPanel {
 					      
 					      if (slider.getValue()==14)
 					      {
-					    	  calc.setBase(14);
+					    	  calc.setBase(0xe);
 					    	  b_note.setText("calculating in base 14");
 					    	  for (int i=0; i < numList.size(); i++)
 					    		  if (i<0xE)
@@ -413,7 +417,7 @@ public class Base4Panel extends JPanel {
 					      
 					      if (slider.getValue()==15)
 					      {
-					    	  calc.setBase(15);
+					    	  calc.setBase(0xf);
 					    	  b_note.setText("calculating in base 15");
 					    	  for (int i=0; i < numList.size(); i++)
 					    		  if (i<0xF)
@@ -424,7 +428,7 @@ public class Base4Panel extends JPanel {
 					      }
 					      else if(slider.getValue()==16)
 					      {
-					    	  calc.setBase(16);
+					    	  calc.setBase(0x10);
 					    	  b_note.setText("calculating in base 16");
 					    	  for (int i=0; i < numList.size(); i++)
 					     		  (numList.get(i)).setEnabled(true);
@@ -482,28 +486,23 @@ public class Base4Panel extends JPanel {
 			}
 			}
 		}
-	
-		public void clear()
-		{
-			
-			 textField.setText("");
-			 current ="0";
-			 numExpected = true;
-			
-		}
-			
+				
 		public void print()
 		{
+			try{
+			int base = calc.getBase();
 			current = calc.equate();
+			int output = Integer.valueOf(current);
+			current = Integer.toString(output, base);
 			textField.setText(current);
+						}
+			
+			catch(NumberFormatException nfe)
+			{
+				textField.setText("Having a little trouble understanding your input");
+				//nfe.printStackTrace();
+			}
 		}
-		
-		public void readIn() 
-		{
-			inputA =textField.getText();
-		}
-		
-		
 		
 	class opListener implements ActionListener
 		{
@@ -523,15 +522,21 @@ public class Base4Panel extends JPanel {
 				 		 
 				 if (lastOp.equals( "=" ))
 				 {
-				calc.setCurr(inputA);
+				calc.equate();
 				 }
 				 else if (lastOp.equals("/"))
-				 {				 	
+				 {	
+			
 					 calc.divide(inputA);
+					 
+					 
 				  }
 				 else if (lastOp.equals( "+" ))
 				 {
+					 inputA= Integer.toString(calc.base10in(inputA));
 					 calc.sum(inputA);
+					// inputA=Integer.toString(calc.base10out(inputA));
+					 
 				 }
 				 else if (lastOp.equals( "-" ))
 				 {
@@ -547,21 +552,27 @@ public class Base4Panel extends JPanel {
 			 }
 			catch(ArithmeticException oops) 
 			 {
-				clear();
+				 textField.setText("");
+				 current ="0";
+				 numExpected = true;
 				calc.clear();
 				textField.setText("Not sure that's legal...");	
 			 }
-			 catch(NullPointerException nullie) //debug usage
+			 catch(NullPointerException nullie) // strictly for debug usage
 			 {
-				clear();
+				 textField.setText("");
+				 current ="0";
+				 numExpected = true;
 				calc.clear();
-				textField.setText("I seem to be losing my faculties...");	
+				textField.setText("I seem to be losing my faculties...");
+				nullie.printStackTrace();
 			 }
 			 catch(Exception ex)
 			 {
-				 clear();
+				 
 					calc.clear();
 					textField.setText("Let's try that again..."); 
+					ex.printStackTrace();
 			 }
 			lastOp = e.getActionCommand();
 					 	
@@ -576,9 +587,16 @@ public class Base4Panel extends JPanel {
 		 {
 			 public void actionPerformed (ActionEvent c)
 			 {
-				
-				 textField.setText("");
-				 calc.clear();
+				 if(c.getActionCommand()=="C")
+				 {
+					 textField.setText("");
+					 calc.clear();
+				 }
+				 
+				 if(c.getActionCommand()=="=")
+				 {
+					 print();
+				 }
 			 }
 		 }
 		 

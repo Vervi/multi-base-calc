@@ -1,4 +1,3 @@
-
 /**
  * Base4Calc class defines the logic behind our calculator. It is responsible for handling base conversions
  * and mathematical operations.
@@ -6,7 +5,7 @@
 
  * 
  * @author zhi/N. Willis
- * @version 0.8.7 
+ * @version 0.8.9 
  *  <p> Field Variables:
  * <ul>
  * 		<li>base : an integer variable pertaining to the number base the calculator is operating in</li>
@@ -46,7 +45,7 @@ public class Base4Calc {
 	 * method: clear takes not parameter. sets field variables to appropriate zero value for its type.
 	 */
 	void clear() { result="";
-					//input=0;
+					input=0;
 					output=0; }
 
 /**
@@ -58,7 +57,10 @@ public class Base4Calc {
 	{
 		base = b;
 	}
-	
+	int getBase()
+	{
+		return base;
+	}
 
 /**
 	*method: base10in takes a string as parameter. using the parseInt method from the Integer class/wrapper the string is read into an 
@@ -70,11 +72,11 @@ public class Base4Calc {
 	
 	int base10in(String s)
 {
-	input = Integer.parseInt(s, base);		//read number in desired base
+	input = Integer.valueOf(s, base);		//read number in desired base
 	String x = Integer.toString(input,base10);	
 	
 	//System.out.println(input);
-	return Integer.parseInt(x);	
+	return Integer.valueOf(x);	
 } 
 
 /**
@@ -86,16 +88,16 @@ public class Base4Calc {
 */ 	
 int base10out(String s)
 {
-	input = Integer.parseInt(s, base10);		
-	String x = Integer.toString(input,base);		//convert from base 10 back to orig
-	//System.out.println(input);
+	input = Integer.valueOf(s, base10);		
+	String x = Integer.toString(input,base);	//convert from base 10 back to orig
+	input = Integer.valueOf(x);	
 	return input;
 } 
 
 public String equate()
 {
 	
-return "" +result; //int as a string
+return result;
 	
 } 
 
@@ -106,7 +108,7 @@ return "" +result; //int as a string
  */
 void setCurr(String A)
 {
-	output =  Integer.parseInt(A,base);
+	output =  Integer.valueOf(A,base);
 }
 
 /**
@@ -116,10 +118,16 @@ void setCurr(String A)
 	 *		
  */
 void sum(String A)//for now focusing just on 2 values
-{	
+{	/*
 	output += base10in(A);
 	result = Integer.toString(output);
 	output = base10out(result);
+	*/
+	
+	output +=Integer.valueOf(A);
+	result = Integer.toString(output);
+	//output = base10out(result);
+	
 }
 //works
 
@@ -131,11 +139,10 @@ void sum(String A)//for now focusing just on 2 values
 */
 void divide(String A)//for now focusing just on 2 values
 {	
-	output /= base10in(A);
+	
+	output /=Integer.valueOf(A);
 	result = Integer.toString(output);
-	output = base10out(result);
 }
-//works
 
 /**
  	*method: multiply takes a string as parameter and uses the 2 helper methods to convert the string to an integer in base 10
@@ -145,9 +152,8 @@ void divide(String A)//for now focusing just on 2 values
 */
 void multiply(String A)//for now focusing just on 2 values
 {	
-	output *= base10in(A);
+	output *=Integer.valueOf(A);
 	result = Integer.toString(output);
-	output = base10out(result);
 }
 //works
 
@@ -159,8 +165,8 @@ void multiply(String A)//for now focusing just on 2 values
 */
 void subtract (String A)
 {
-	output -= base10in(A);
+	output +=Integer.valueOf(A);
 	result = Integer.toString(output);
-	output = base10out(result);
 }
 }
+
