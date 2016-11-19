@@ -24,3 +24,4 @@ Syntax cheat sheet for Html. Great help in formatting documentation.
 
 <a href= "http://corochann.com/get-to-know-coding-rule-of-javadoc-in-10-mins-366.html#see">JavaDoc Linking </a>Helpful in figuring out proper syntax for Javadoc commenting
 
+<a href="http://www.java67.com/2014/05/3-examples-to-loop-map-in-java-foreach.html"> Map Looping </a> Great examples of different wasy to loop over map.

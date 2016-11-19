@@ -2,7 +2,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import net.miginfocom.swing.MigLayout;
-import java.util.ArrayList;
+import java.util.*;
 /**
  ** <p>
  *	Base4Panel class lays out the Graphical User Interface components of our Calculator.
@@ -32,7 +32,9 @@ public class Base4Panel extends JPanel {
 	private JButton thrtn;
 	private JButton fourtn;
 	private JButton fiftn;	
-	private ArrayList<JButton> num;
+	private HashMap<Integer,JButton> num;
+	
+	
 	
 	
 	private JSlider slider;
@@ -123,33 +125,56 @@ public class Base4Panel extends JPanel {
 		fiftn = new JButton("F");
 		add(fiftn, "cell 6 6,aligny center");
 		
-		//initialize/fill array list for ease of access/modification of state
-		num = new ArrayList<JButton>(){ //
+		
+		
+		
+		
+		//initialize/fill map for ease of access/modification of state & adding keypad fn
+		num = new HashMap<Integer,JButton>(){ //
 			{
-			add(zero);
-			add(one);
-			add(two);
-			add(three);
-			add(four);
-			add(five);
-			add(six);
-			add(seven);
-			add(eight);
-			add(nine);
-			add(ten);
-			add(elvn);
-			add(twelve);
-			add(thrtn);
-			add(fourtn);
-			add(fiftn);
+			put((KeyEvent.VK_NUMPAD0) ,zero);
+			put((KeyEvent.VK_NUMPAD1) ,one);
+			put((KeyEvent.VK_NUMPAD2),two);
+			put((KeyEvent.VK_NUMPAD3),three);
+			put((KeyEvent.VK_NUMPAD4),four);
+			put((KeyEvent.VK_NUMPAD5),five);
+			put((KeyEvent.VK_NUMPAD6),six);
+			put((KeyEvent.VK_NUMPAD7),seven);
+			put((KeyEvent.VK_NUMPAD8),eight);
+			put((KeyEvent.VK_NUMPAD9),nine);
+			put((KeyEvent.VK_A),ten);
+			put((KeyEvent.VK_B),elvn);
+			put((KeyEvent.VK_C),twelve);
+			put((KeyEvent.VK_D),thrtn);
+			put((KeyEvent.VK_E),fourtn);
+			put((KeyEvent.VK_F),fiftn);
 			}
 			};
 		
-			//adding actoinListeners to each of the buttons
-			for(JButton button : num)
+			Collection<JButton> numkeys = num.values();
+			for (JButton jb : numkeys ) 
 			{
-				button.addActionListener(digit);
+				jb.addActionListener(digit);
 			}
+
+			
+			
+			
+			//keystroke entry test below
+			
+		/*
+		 * component.getInputMap().put(aKeyStroke, aCommand);
+		 *  component.getActionMap().put(aCommmand, anAction);
+		 */
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		
 	
 		//creation of operand buttons
@@ -390,8 +415,7 @@ public class Base4Panel extends JPanel {
 		
 	}
 
-
-		
+	
 	 class numListener implements ActionListener
 	{
 		public void actionPerformed (ActionEvent click)
