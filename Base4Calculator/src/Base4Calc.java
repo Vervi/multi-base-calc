@@ -2,7 +2,7 @@
 //import java.util.ArrayList;
 
 /**
- * @title Base4Calc
+ * Base4Calc
  * @author zhi
  * 
  * Base4Calc class defines the logic behind our calculator. It is responsible for handling base conversions
@@ -21,13 +21,21 @@ public class Base4Calc {
 	
 	String result;//default  output	
 	
+	
+	/**
+	 * Constructor: initializes result field variable to "0";
+	 */
 	Base4Calc() { result="0"; }
 	
+	/**
+	 * method: clear takes not parameter. sets field variables to appropriate zero value for its type.
+	 */
 	void clear() { result="0"; input=0; output=0; }
 
 /**
 	*	method: setBase takes an int parameter and sets the current base to that value when called
-	*
+	*		@param int
+	*			
 */	
 	void setBase(int b)
 	{
@@ -38,6 +46,9 @@ public class Base4Calc {
 /**
 	*method: base10in takes a string as parameter. using the parseInt method from the Integer class/wrapper the string is read into an 
 	* int in the appropriate base. The int is then converted to base 10 and then cast back to (and returned as) a string.
+	* 	@param s of type String
+	* 	@return base 10 version of input string
+	* 	
 */
 	
 	int base10in(String s)
@@ -52,7 +63,10 @@ public class Base4Calc {
 /**
 	*method: base10out takes a string as parameter. using the parseInt method from the Integer class/wrapper the string is read into an 
 	* int in base10 The int is then converted to a different base and then cast back to (and returned as) a string.
-*/
+	* 	@param s of type String
+	*	@return input integer in original base
+	*
+*/ 	
 int base10out(String s)
 {
 	input = Integer.parseInt(s, base10);		
@@ -70,6 +84,8 @@ return "" +result; //int as a string
 
 /**
 	 *method: setCurr takes a string as parameter and converts it to an Integer in the current base
+	 *		@param A of type String
+	 *		
  */
 void setCurr(String A)
 {
@@ -79,6 +95,8 @@ void setCurr(String A)
 /**
 	 *method: sum takes a string as parameter and uses the 2 helper methods to convert the string to an integer in base 10
 	 *add it to the current value of output then convert said output back to the appropriate base.
+	 *		@param A of type String
+	 *		
  */
 void sum(String A)//for now focusing just on 2 values
 {	
@@ -91,6 +109,8 @@ void sum(String A)//for now focusing just on 2 values
 /**
  	*method: divide takes a string as parameter and uses the 2 helper methods to convert the string to an integer in base 10
  	*divides the current value of output by it then convert said output back to the appropriate base.
+ 	*		@param A of type String
+	*		
 */
 void divide(String A)//for now focusing just on 2 values
 {	
@@ -103,6 +123,8 @@ void divide(String A)//for now focusing just on 2 values
 /**
  	*method: multiply takes a string as parameter and uses the 2 helper methods to convert the string to an integer in base 10
  	*multiply the current value of output by it then convert said output back to the appropriate base.
+ 	*		@param A of type String
+	*		
 */
 void multiply(String A)//for now focusing just on 2 values
 {	
@@ -115,6 +137,8 @@ void multiply(String A)//for now focusing just on 2 values
 /**
  	*method: subtract takes a string as parameter and uses the 2 helper methods to convert the string to an integer in base 10
  	*find the difference between the current value of output and said integer then convert output back to the appropriate base.
+ 	*		@param A of type String
+	*		
 */
 void subtract (String A)
 {

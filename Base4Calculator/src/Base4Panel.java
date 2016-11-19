@@ -4,7 +4,7 @@ import javax.swing.event.*;
 import net.miginfocom.swing.MigLayout;
 import java.util.ArrayList;
 /**
- * @title Base4Panel
+ * Base4Panel
  * @category gui
  * @author zhi
  * 
@@ -15,8 +15,6 @@ import java.util.ArrayList;
 public class Base4Panel extends JPanel {
 	private Base4Calc calc; // this object will actually do the calculating work
 	
-//	private ArrayList<JButton> op = new ArrayList<JButton>();// 
-
 	private JButton zero;
 	private JButton one;
 	private JButton two; 
@@ -43,6 +41,8 @@ public class Base4Panel extends JPanel {
 	private JButton minus; 
 	private JButton multiply; 
 	private JButton divide;
+	private ArrayList<JButton> op;
+	
 	private JButton equals;
 	private JButton clear;
 	
@@ -156,30 +156,36 @@ public class Base4Panel extends JPanel {
 				clear.addActionListener(clr);
 				add(clear, "cell 8 2,alignx center,aligny center");
 			
+				
 				plus = new JButton("+"); 
-				plus.addActionListener(operand);
 				add(plus, "cell 8 3,alignx left,aligny center");
-				
-				
+					
 				minus = new JButton("-"); 
-				minus.addActionListener(operand);
 				add(minus, "cell 8 4,alignx left,aligny center");
-				
-				
+							
 				multiply = new JButton("*"); 
-				multiply.addActionListener(operand);
 				add(multiply, "cell 8 5,alignx left,aligny center");
-			
-				
+						
 				divide = new JButton("/"); 
-				divide.addActionListener(operand);
 				add(divide, "cell 8 6,alignx left,aligny center");
-				
-				
+							
 				equals = new JButton("=");
-				equals.addActionListener(operand);
 				add(equals, "cell 5 7,alignx left,aligny center");
-				
+
+				op = new ArrayList<JButton>(){
+				{	
+				add(plus);
+				add(minus);
+				add(multiply);
+				add(divide);
+				add(equals);
+				}
+				};
+			
+				for(JButton button : op)
+				{
+					button.addActionListener(operand);
+				}
 				
 				//Creation of Jslider
 				slider = new JSlider();
@@ -382,8 +388,7 @@ public class Base4Panel extends JPanel {
 						
 				slider.setOrientation(SwingConstants.VERTICAL);
 				add(slider, "cell 0 2 2 5");
-			
-	
+		
 	}
 
 
@@ -413,6 +418,7 @@ public class Base4Panel extends JPanel {
 			 numExpected = true;
 			
 		}
+				
 		public void print()
 		{
 			current = calc.equate();
@@ -438,7 +444,7 @@ public class Base4Panel extends JPanel {
 			 	else
 			 	{
 			 numExpected = true;
-			 try{
+			 	try{
 				 inputA =textField.getText();
 				 		 
 				 if (lastOp.equals( "=" ))
