@@ -58,6 +58,7 @@ public class Base4Panel extends JPanel {
 	private InputMap inMap;
 	private ActionMap actMap;
 	
+	@SuppressWarnings("serial")
 	Base4Panel() {
 		
 		calc = new Base4Calc();
@@ -81,7 +82,7 @@ public class Base4Panel extends JPanel {
 		
 			
 		
-	//	Creation of numeric buttons
+	//	Creation & Layout of numeric buttons
 		one = new JButton("1");
 		add(one, "cell 4 3,alignx left,aligny center");
 			
@@ -152,6 +153,7 @@ public class Base4Panel extends JPanel {
 			put((KeyEvent.VK_F),fiftn);
 			}
 			};
+			//Ordered container of buttons
 			ArrayList<JButton> numList = new ArrayList<JButton>(){
 	 			{
 	 			add(zero);
@@ -481,7 +483,7 @@ public class Base4Panel extends JPanel {
 			}
 		}
 	
-				public void clear()
+		public void clear()
 		{
 			
 			 textField.setText("");
@@ -489,7 +491,7 @@ public class Base4Panel extends JPanel {
 			 numExpected = true;
 			
 		}
-				
+			
 		public void print()
 		{
 			current = calc.equate();
@@ -502,14 +504,13 @@ public class Base4Panel extends JPanel {
 		}
 		
 		
-		//NOTE:edit required, see log for issues w/ equals button
+		
 	class opListener implements ActionListener
 		{
 		 public void actionPerformed (ActionEvent e)
 			{
 			 	if (numExpected)
 			 	{
-			 		//clear();
 			 		textField.setText("");
 			 		calc.clear();
 			 		textField.setText("oops trying entering a number.");
