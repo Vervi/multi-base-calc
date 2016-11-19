@@ -1,27 +1,42 @@
-//import java.awt.event.*;
-//import java.util.ArrayList;
 
 /**
- * Base4Calc
- * @author zhi
- * 
  * Base4Calc class defines the logic behind our calculator. It is responsible for handling base conversions
  * ans mathematical operations.
+ * 
+
+ * 
+ * @author zhi/N. Willis
+ * @version 0.8.7 
+ *  <p> Field Variables:
+ * <ul>
+ * 		<li>base : an integer variable pertaining to the number base the calculator is operating in</li>
+ * 	<li>base10 : constant int variable to represent base 10 for simplified operation purposes
+ * </li>
+ * <li>input : integer version of string to be read in and converted into/out of base 10.</li>
+ * <li>output : integer keeping track of current total (result)</li>
+ * </ul>
+ * </p>
+ *   
+ *   @see #clear()
+ *   @see #sum(String)
+ *   @see #subtract(String)
+ *   @see #multiply(String)
+ *   @see #divide(String)
+ *   @see #equate()
+ *   @see #setBase(int)
+ *   @see #setCurr(String)
+ *   @see #base10in(String)
+ *   @see #base10out(String)
+ *   
+ *  
  */
 public class Base4Calc {
 	int base=16;
-    private int base10= 10;
-	//private String input = "0";
-    private int input = 0;
+    private final int base10= 10;
+	private int input = 0;
     private int output =0;
-	
-
-	String current="0";//tracker for current total
-	//ArrayList<Integer> terms;// for expansion
-	
 	String result;//default  output	
-	
-	
+		
 	/**
 	 * Constructor: initializes result field variable to "0";
 	 */

@@ -156,7 +156,6 @@ public class Base4Panel extends JPanel {
 				clear.addActionListener(clr);
 				add(clear, "cell 8 2,alignx center,aligny center");
 			
-				
 				plus = new JButton("+"); 
 				add(plus, "cell 8 3,alignx left,aligny center");
 					
@@ -196,8 +195,7 @@ public class Base4Panel extends JPanel {
 				slider.setMinimum(2);
 				slider.setMaximum(16);
 				
-				//TESTING PURPOSES NEEDS TO BE SWITCHED BACK TO 16 ONCE MATH LOGIC FUNCTIONS NORMALLY AGAIN
-				slider.setValue(16);//set default value to calculate in base 10
+				slider.setValue(16);
 				b_note.setText("calculating in base 16");
 				
 				slider.addChangeListener(new ChangeListener() {
@@ -430,6 +428,8 @@ public class Base4Panel extends JPanel {
 			inputA =textField.getText();
 		}
 		
+		
+		//NOTE:edit required, see log for issues w/ equals button
 	class opListener implements ActionListener
 		{
 		 public void actionPerformed (ActionEvent e)
