@@ -44,7 +44,7 @@ public class Base4Panel extends JPanel {
 	private JButton minus; 
 	private JButton multiply; 
 	private JButton divide;
-	private ArrayList<JButton> op;
+	private HashMap<Integer,JButton> op;
 	
 	private JButton equals;
 	private JButton clear;
@@ -55,6 +55,9 @@ public class Base4Panel extends JPanel {
 	
 	private boolean numExpected = true;
 	private JLabel b_note;
+	
+	private InputMap inMap;
+	private ActionMap actMap;
 	
 	Base4Panel() {
 		
@@ -132,16 +135,16 @@ public class Base4Panel extends JPanel {
 		//initialize/fill map for ease of access/modification of state & adding keypad fn
 		num = new HashMap<Integer,JButton>(){ //
 			{
-			put((KeyEvent.VK_NUMPAD0) ,zero);
-			put((KeyEvent.VK_NUMPAD1) ,one);
-			put((KeyEvent.VK_NUMPAD2),two);
-			put((KeyEvent.VK_NUMPAD3),three);
-			put((KeyEvent.VK_NUMPAD4),four);
-			put((KeyEvent.VK_NUMPAD5),five);
-			put((KeyEvent.VK_NUMPAD6),six);
-			put((KeyEvent.VK_NUMPAD7),seven);
-			put((KeyEvent.VK_NUMPAD8),eight);
-			put((KeyEvent.VK_NUMPAD9),nine);
+			put((KeyEvent.VK_0) ,zero);
+			put((KeyEvent.VK_1) ,one);
+			put((KeyEvent.VK_2),two);
+			put((KeyEvent.VK_3),three);
+			put((KeyEvent.VK_4),four);
+			put((KeyEvent.VK_5),five);
+			put((KeyEvent.VK_6),six);
+			put((KeyEvent.VK_7),seven);
+			put((KeyEvent.VK_8),eight);
+			put((KeyEvent.VK_9),nine);
 			put((KeyEvent.VK_A),ten);
 			put((KeyEvent.VK_B),elvn);
 			put((KeyEvent.VK_C),twelve);
@@ -155,6 +158,33 @@ public class Base4Panel extends JPanel {
 			for (JButton jb : numkeys ) 
 			{
 				jb.addActionListener(digit);
+			}
+
+
+			
+			Set<Map.Entry<Integer, JButton>> numSet = num.entrySet();
+						
+			
+			for (Map.Entry<Integer,JButton> pair : numSet) 
+			{
+				
+				JButton jb = pair.getValue();
+								
+				inMap = jb.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+	            actMap = jb.getActionMap();
+	            
+	            
+	            inMap.put(KeyStroke.getKeyStroke(pair.getKey(), 0), "keyPress");
+	            	            
+	            actMap.put("keyPress", new AbstractAction() 
+	            {
+	                @Override
+	                public void actionPerformed(ActionEvent press) 
+	                {
+	                    JButton key = (JButton) press.getSource();
+	                    key.doClick();
+	                }
+	         });
 			}
 
 			
