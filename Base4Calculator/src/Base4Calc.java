@@ -1,9 +1,15 @@
-import java.awt.event.*;
-import java.util.ArrayList;
+//import java.awt.event.*;
+//import java.util.ArrayList;
 
+/**
+ * @title Base4Calc
+ * @author zhi
+ * 
+ * Base4Calc class defines the logic behind our calculator. It is responsible for handling base conversions
+ * ans mathematical operations.
+ */
 public class Base4Calc {
-	private int x,y,z;
-	int base=10;//default base is 10 for testing purposes
+	int base=16;
     private int base10= 10;
 	//private String input = "0";
     private int input = 0;
@@ -43,10 +49,10 @@ public class Base4Calc {
 	return Integer.parseInt(x);	
 } 
 
-	/**
+/**
 	*method: base10out takes a string as parameter. using the parseInt method from the Integer class/wrapper the string is read into an 
 	* int in base10 The int is then converted to a different base and then cast back to (and returned as) a string.
-	*/
+*/
 int base10out(String s)
 {
 	input = Integer.parseInt(s, base10);		
@@ -62,10 +68,18 @@ return "" +result; //int as a string
 	
 } 
 
+/**
+	 *method: setCurr takes a string as parameter and converts it to an Integer in the current base
+ */
 void setCurr(String A)
 {
 	output =  Integer.parseInt(A,base);
 }
+
+/**
+	 *method: sum takes a string as parameter and uses the 2 helper methods to convert the string to an integer in base 10
+	 *add it to the current value of output then convert said output back to the appropriate base.
+ */
 void sum(String A)//for now focusing just on 2 values
 {	
 	output += base10in(A);
@@ -74,7 +88,10 @@ void sum(String A)//for now focusing just on 2 values
 }
 //works
 
-
+/**
+ 	*method: divide takes a string as parameter and uses the 2 helper methods to convert the string to an integer in base 10
+ 	*divides the current value of output by it then convert said output back to the appropriate base.
+*/
 void divide(String A)//for now focusing just on 2 values
 {	
 	output /= base10in(A);
@@ -83,6 +100,10 @@ void divide(String A)//for now focusing just on 2 values
 }
 //works
 
+/**
+ 	*method: multiply takes a string as parameter and uses the 2 helper methods to convert the string to an integer in base 10
+ 	*multiply the current value of output by it then convert said output back to the appropriate base.
+*/
 void multiply(String A)//for now focusing just on 2 values
 {	
 	output *= base10in(A);
@@ -90,6 +111,11 @@ void multiply(String A)//for now focusing just on 2 values
 	output = base10out(result);
 }
 //works
+
+/**
+ 	*method: subtract takes a string as parameter and uses the 2 helper methods to convert the string to an integer in base 10
+ 	*find the difference between the current value of output and said integer then convert output back to the appropriate base.
+*/
 void subtract (String A)
 {
 	output -= base10in(A);

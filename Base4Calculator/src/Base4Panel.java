@@ -1,11 +1,17 @@
-import java.awt.FlowLayout;
 import java.awt.event.*;
-
 import javax.swing.*;
 import javax.swing.event.*;
 import net.miginfocom.swing.MigLayout;
 import java.util.ArrayList;
-
+/**
+ * @title Base4Panel
+ * @category gui
+ * @author zhi
+ * 
+ * Base4Panel class lays out the Graphical User Interface component of our Calculator.
+ * 
+ *
+ */
 public class Base4Panel extends JPanel {
 	private Base4Calc calc; // this object will actually do the calculating work
 	
@@ -185,8 +191,8 @@ public class Base4Panel extends JPanel {
 				slider.setMaximum(16);
 				
 				//TESTING PURPOSES NEEDS TO BE SWITCHED BACK TO 16 ONCE MATH LOGIC FUNCTIONS NORMALLY AGAIN
-				slider.setValue(10);//set default value to calculate in base 10
-				b_note.setText("calculating in base 10");
+				slider.setValue(16);//set default value to calculate in base 10
+				b_note.setText("calculating in base 16");
 				
 				slider.addChangeListener(new ChangeListener() {
 					     public void stateChanged(ChangeEvent e) {
