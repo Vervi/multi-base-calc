@@ -373,9 +373,7 @@ public class Base4Panel extends JPanel {
 					    		  (num.get(i)).setEnabled(false);
 					    			  					      
 					      }
-					      
-					      
-					      }
+					     }
 					     } 
 					    });
 						
@@ -411,7 +409,7 @@ public class Base4Panel extends JPanel {
 			 textField.setText("");
 			 current ="0";
 			 numExpected = true;
-			// count = 0;
+			
 		}
 		public void print()
 		{
@@ -424,8 +422,6 @@ public class Base4Panel extends JPanel {
 		public void readIn() 
 		{
 			inputA =textField.getText();
-		//textField.setText("");
-		//	count++;//will need for stack/rpn/tape fns later
 		}
 		
 	class opListener implements ActionListener
@@ -453,7 +449,7 @@ public class Base4Panel extends JPanel {
 				  }
 				 else if (lastOp.equals( "+" ))
 				 {
-					 calc.sum(current, inputA);
+					 calc.sum(inputA);
 				 }
 				 else if (lastOp.equals( "-" ))
 				 {
@@ -470,6 +466,7 @@ public class Base4Panel extends JPanel {
 			catch(Exception oops) 
 			 {
 				clear();
+				calc.clear();
 				textField.setText("Oops! I didn't catch that.");	
 			 }
 			lastOp = e.getActionCommand();
@@ -485,7 +482,9 @@ public class Base4Panel extends JPanel {
 		 {
 			 public void actionPerformed (ActionEvent c)
 			 {
-				 clear();
+				// clear();
+				 textField.setText("");
+				 calc.clear();
 			 }
 		 }
 		 

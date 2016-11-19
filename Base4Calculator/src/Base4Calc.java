@@ -5,7 +5,9 @@ public class Base4Calc {
 	private int x,y,z;
 	int base=10;//default base is 10 for testing purposes
     private int base10= 10;
-	private String input = "0";
+	//private String input = "0";
+    private int input = 0;
+    private int output =0;
 	
 
 	String current="0";//tracker for current total
@@ -15,7 +17,7 @@ public class Base4Calc {
 	
 	Base4Calc() { result="0"; }
 	
-	//void clear() { result="0"; }
+	void clear() { result="0"; input=0; output=0; }
 
 /**
 	*	method: setBase takes an int parameter and sets the current base to that value when called
@@ -32,30 +34,36 @@ public class Base4Calc {
 	* int in the appropriate base. The int is then converted to base 10 and then cast back to (and returned as) a string.
 */
 	
-	String base10in(String s)
+	int base10in(String s)
 {
-	int x = Integer.parseInt(s, base);		//read number in desired base
-	input = Integer.toString(x,base10);		//convert to a string in base 10 for calculations
+	input = Integer.parseInt(s, base);		//read number in desired base
+	String x = Integer.toString(input,base10);	
+	
 	//System.out.println(input);
-	return input;
+	return Integer.parseInt(x);	
 } 
 
 	/**
 	*method: base10out takes a string as parameter. using the parseInt method from the Integer class/wrapper the string is read into an 
 	* int in base10 The int is then converted to a different base and then cast back to (and returned as) a string.
 	*/
-String base10out(String s)
+int base10out(String s)
 {
-	int x = Integer.parseInt(s, base10);		
-	input = Integer.toString(x,base);		//convert from base 10 back to orig
+	input = Integer.parseInt(s, base10);		
+	String x = Integer.toString(input,base);		//convert from base 10 back to orig
 	//System.out.println(input);
 	return input;
 } 
-//works
 
-void sum(String A, String B)//for now focusing just on 2 values
-{	
+public String equate()
+{
 	
+return "" +result; //int as a string
+	
+} 
+void sum(String A)//for now focusing just on 2 values
+{	
+	/*
 	x = Integer.parseInt(base10in(A));
 	y = Integer.parseInt(base10in(B));
 	z = x+y; 
@@ -63,39 +71,47 @@ void sum(String A, String B)//for now focusing just on 2 values
 	result=base10out(Integer.toString(z));
 	//	System.out.println(result);
 	//return result;
+	 */
+	output += base10in(A);
+	result = Integer.toString(output);
+	output = base10out(result);
 }
 //works
 
 
 void divide(String A, String B)//for now focusing just on 2 values
-{	
+{	/*
 	x = Integer.parseInt(base10in(A));
 	y = Integer.parseInt(base10in(B));
 	z = x/y; 
 	result=base10out(Integer.toString(z));
-	//System.out.println(result);
-	//return result;
+	*/
 }
 //works
 
 void multiply(String A, String B)//for now focusing just on 2 values
-{	
+{	/*
 	x = Integer.parseInt(base10in(A));
 	y = Integer.parseInt(base10in(B));
 	z = x*y; 
 	result=base10out(Integer.toString(z));
 //	System.out.println(result);
 	//return result;
+	  
+	  
+	 */
 }
 //works
 void subtract (String A, String B)
-{
+{/*
 	x = Integer.parseInt(base10in(A));
 	y = Integer.parseInt(base10in(B));
 	z = x-y; 
     result=base10out(Integer.toString(z));
 	System.out.println(result);
 	 //return result;
+	  * 
+	  */
 }	
 /*void sum (String A)//for now focusing just on 2 values
 {
@@ -151,9 +167,5 @@ void subtract(String A, String B)
 //works
 */
 
-public String equate(){
-	
-return "" +result; //int as a string
-	
-}  
+ 
 }
