@@ -159,54 +159,8 @@ public class Base4Panel extends JPanel {
 			{
 				jb.addActionListener(digit);
 			}
-
-
-			
-			Set<Map.Entry<Integer, JButton>> numSet = num.entrySet();
 						
 			
-			for (Map.Entry<Integer,JButton> pair : numSet) 
-			{
-				
-				JButton jb = pair.getValue();
-								
-				inMap = jb.getInputMap(WHEN_IN_FOCUSED_WINDOW);
-	            actMap = jb.getActionMap();
-	            
-	            
-	            inMap.put(KeyStroke.getKeyStroke(pair.getKey(), 0), "keyPress");
-	            	            
-	            actMap.put("keyPress", new AbstractAction() 
-	            {
-	                @Override
-	                public void actionPerformed(ActionEvent press) 
-	                {
-	                    JButton key = (JButton) press.getSource();
-	                    key.doClick();
-	                }
-	         });
-			}
-
-			
-			
-			
-			//keystroke entry test below
-			
-		/*
-		 * component.getInputMap().put(aKeyStroke, aCommand);
-		 *  component.getActionMap().put(aCommmand, anAction);
-		 */
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		
-	
 		//creation of operand buttons
 				clear = new JButton("C");//clear button gets its own listener
 				clear.addActionListener(clr);
@@ -227,20 +181,47 @@ public class Base4Panel extends JPanel {
 				equals = new JButton("=");
 				add(equals, "cell 5 7,alignx left,aligny center");
 
-				op = new ArrayList<JButton>(){
+				op = new HashMap<Integer,JButton>(){
 				{	
-				add(plus);
-				add(minus);
-				add(multiply);
-				add(divide);
-				add(equals);
+				put((KeyEvent.VK_ADD),plus);
+				put((KeyEvent.VK_SUBTRACT),minus);
+				put((KeyEvent.VK_MULTIPLY),multiply);
+				put((KeyEvent.VK_DIVIDE),divide);
+				put((KeyEvent.VK_ENTER),equals);
 				}
 				};
 			
-				for(JButton button : op)
+				Collection<JButton> opkeys = op.values();
+				for (JButton jb : opkeys ) 
 				{
-					button.addActionListener(operand);
+					jb.addActionListener(operand);
 				}
+		
+				//add Keyboard Functionality
+				Set<Map.Entry<Integer, JButton>> numSet = num.entrySet();
+				addKeyPress(numSet);
+				Set<Map.Entry<Integer, JButton>> opSet = op.entrySet();
+				addKeyPress(opSet);
+				
+				//add keyboard for clear button
+				inMap = clear.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+			    actMap = clear.getActionMap();
+			    inMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "keyPress");
+			    actMap.put("keyPress", new AbstractAction() 
+			     {
+			            @Override
+		          public void actionPerformed(ActionEvent press) 
+		          {
+	                JButton key = (JButton) press.getSource();
+	                key.doClick();
+	            }
+			     });
+	
+				
+				
+				
+				
+				
 				
 				//Creation of Jslider
 				slider = new JSlider();
@@ -445,6 +426,35 @@ public class Base4Panel extends JPanel {
 		
 	}
 
+
+	@SuppressWarnings("serial")
+	public void addKeyPress(Set<Map.Entry<Integer, JButton>> A)
+	{
+	for (Map.Entry<Integer,JButton> pair : A) 
+	{
+		
+		JButton jb = pair.getValue();
+						
+		inMap = jb.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+        actMap = jb.getActionMap();
+        
+        
+        inMap.put(KeyStroke.getKeyStroke(pair.getKey(), 0), "keyPress");
+        	            
+        actMap.put("keyPress", new AbstractAction() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent press) 
+            {
+                JButton key = (JButton) press.getSource();
+                key.doClick();
+            }
+     });
+	}
+	}
+	
+
+	
 	
 	 class numListener implements ActionListener
 	{
