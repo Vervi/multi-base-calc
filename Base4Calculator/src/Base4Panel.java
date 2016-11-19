@@ -490,6 +490,10 @@ public class Base4Panel extends JPanel {
 					textField.setText("Let's try that again..."); 
 			 }
 			lastOp = e.getActionCommand();
+			
+			//debugging
+			if (lastOp =="=");
+				numExpected=false;
 			 	
 			
 			}

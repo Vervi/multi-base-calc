@@ -45,7 +45,9 @@ public class Base4Calc {
 	/**
 	 * method: clear takes not parameter. sets field variables to appropriate zero value for its type.
 	 */
-	void clear() { result="0"; input=0; output=0; }
+	void clear() { result="";
+					//input=0;
+					output=0; }
 
 /**
 	*	method: setBase takes an int parameter and sets the current base to that value when called
