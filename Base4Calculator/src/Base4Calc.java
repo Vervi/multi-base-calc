@@ -112,7 +112,14 @@ return result;
  */
 void setCurr(String A)
 {
+	try
+	{
 	output =  Integer.valueOf(A,base);
+	}
+	catch(NumberFormatException nfe)
+	{
+	System.out.println("Input Illegible.");
+	}
 }
 
 /**

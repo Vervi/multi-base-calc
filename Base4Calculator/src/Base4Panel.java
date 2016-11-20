@@ -50,10 +50,11 @@ public class Base4Panel extends JPanel {
 	String current="0";
 	
 	private boolean numExpected = true;
-	private JLabel b_note;
+	private JLabel b_note;	//label to indicate current base
 	
 	private HashMap<Integer,JButton> num;
 	private HashMap<Integer,JButton> op;
+	private ArrayList<JButton> numList;
 	
 	private InputMap inMap;
 	private ActionMap actMap;
@@ -127,12 +128,8 @@ public class Base4Panel extends JPanel {
 		fiftn = new JButton("F");
 		add(fiftn, "cell 6 6,aligny center");
 		
-		
-		
-		
-		
 		//initialize/fill map for ease of access/modification of state & adding keypad fn
-		num = new HashMap<Integer,JButton>(){ //
+		num = new HashMap<Integer,JButton>(){ 
 			{
 			put((KeyEvent.VK_0) ,zero);
 			put((KeyEvent.VK_1) ,one);
@@ -152,7 +149,8 @@ public class Base4Panel extends JPanel {
 			put((KeyEvent.VK_F),fiftn);
 			}
 			};
-			ArrayList<JButton> numList = new ArrayList<JButton>(){
+			
+			numList = new ArrayList<JButton>(){
 	 			{
 	 			add(zero);
 	 			add(one);
@@ -245,7 +243,7 @@ public class Base4Panel extends JPanel {
 				slider.setMaximum(16);
 				
 				slider.setValue(16);
-				b_note.setText("calculating in base 16");
+				baseNotifier();
 	
 				
 				
@@ -254,183 +252,12 @@ public class Base4Panel extends JPanel {
 					    JSlider source = (JSlider)e.getSource();
 					      if (!source.getValueIsAdjusting())
 					      {
-					    	
-					      if (slider.getValue()==2)
-					      {
-					    	  calc.setBase(2);
-					    	  b_note.setText("calculating in base 2");
-					    	  for (int i=0; i < numList.size(); i++)
-					    		  if (i<2)
-					    		  (numList.get(i)).setEnabled(true);
-					    		  else
-					    		  (numList.get(i)).setEnabled(false);
-					    			  					      
-					      }
-					      else if(slider.getValue()==3)
-					      {
-					    	  calc.setBase(3);
-					    	  b_note.setText("calculating in base 3");
-					    	  for (int i=0; i < numList.size(); i++)
-					    		  if (i<3)
-					    		  (numList.get(i)).setEnabled(true);
-					    		  else
-					    		  (numList.get(i)).setEnabled(false);
-					    			  					      
-					      }
-					     
-					      else if(slider.getValue()==4)
-					      {
-					    	  calc.setBase(4);
-					    	  b_note.setText("calculating in base 4");
-					    	  for (int i=0; i < numList.size(); i++)
-					    		  if (i<4)
-					    		  (numList.get(i)).setEnabled(true);
-					    		  else
-					    		  (numList.get(i)).setEnabled(false);
-					    			  					      
-					      }
-					      
-					      if (slider.getValue()==5)
-					      {
-					    	  calc.setBase(5);
-					    	  b_note.setText("calculating in base 5");
-					    	  for (int i=0; i < numList.size(); i++)
-					    		  if (i<5)
-					    		  (numList.get(i)).setEnabled(true);
-					    		  else
-					    		  (numList.get(i)).setEnabled(false);
-					    			  					      
-					      }  
-					      
-					      if (slider.getValue()==6)
-					      {
-					    	  calc.setBase(6);
-					    	  b_note.setText("calculating in base 6");
-					    	  for (int i=0; i < numList.size(); i++)
-					    		  if (i<6)
-					    		  (numList.get(i)).setEnabled(true);
-					    		  else
-					    		  (numList.get(i)).setEnabled(false);
-					    			  					      
-					      }
-					      
-					      if (slider.getValue()==7)
-					      {
-					    	  calc.setBase(7);
-					    	  b_note.setText("calculating in base 7");
-					    	  for (int i=0; i < numList.size(); i++)
-					    		  if (i<7)
-					    		  (numList.get(i)).setEnabled(true);
-					    		  else
-					    		  (numList.get(i)).setEnabled(false);
-					    			  					      
-					      }
-					      
-					      if (slider.getValue()==8)
-					      {
-					    	  calc.setBase(8);
-					    	  b_note.setText("calculating in base 8");
-					    	  for (int i=0; i < numList.size(); i++)
-					    		  if (i<8)
-					    		  (numList.get(i)).setEnabled(true);
-					    		  else
-					    		  (numList.get(i)).setEnabled(false);
-					    			  					      
-					      }
-					      
-					      if (slider.getValue()==9)
-					      {
-					    	  calc.setBase(9);
-					    	  b_note.setText("calculating in base 9");
-					    	  for (int i=0; i < numList.size(); i++)
-					    		  if (i<9)
-					    		  (numList.get(i)).setEnabled(true);
-					    		  else
-					    		  (numList.get(i)).setEnabled(false);
-					    			  					      
-					      }
-					      
-					      else if(slider.getValue()==10)
-					      {
-					    	  calc.setBase(10);
-					    	  b_note.setText("calculating in base 10");
-					    	  for (int i=0; i < numList.size(); i++)
-					    		  if (i<0xA)
-					    		  (numList.get(i)).setEnabled(true);
-					    		  else
-					    		  (numList.get(i)).setEnabled(false);
-					    			  					      
-					      }
-					      if (slider.getValue()==11)
-					      {
-					    	  calc.setBase(11);
-					    	  b_note.setText("calculating in base 11");
-					    	  for (int i=0; i < numList.size(); i++)
-					    		  if (i<0xB)
-					    		  (numList.get(i)).setEnabled(true);
-					    		  else
-					    		  (numList.get(i)).setEnabled(false);
-					    			  					      
-					      }
-					      
-					      if (slider.getValue()==12)
-					      {
-					    	  calc.setBase(12);
-					    	  b_note.setText("calculating in base 12");
-					    	  for (int i=0; i < numList.size(); i++)
-					    		  if (i<0xC)
-					    		  (numList.get(i)).setEnabled(true);
-					    		  else
-					    		  (numList.get(i)).setEnabled(false);
-					    			  					      
-					      }
-					      
-					      if (slider.getValue()==13)
-					      {
-					    	  calc.setBase(13);
-					    	  b_note.setText("calculating in base 13");
-					    	  for (int i=0; i < numList.size(); i++)
-					    		  if (i<0xD)
-					    		  (numList.get(i)).setEnabled(true);
-					    		  else
-					    		  (numList.get(i)).setEnabled(false);
-					    			  					      
-					      }
-					      
-					      if (slider.getValue()==14)
-					      {
-					    	  calc.setBase(14);
-					    	  b_note.setText("calculating in base 14");
-					    	  for (int i=0; i < numList.size(); i++)
-					    		  if (i<0xE)
-					    		  (numList.get(i)).setEnabled(true);
-					    		  else
-					    		  (numList.get(i)).setEnabled(false);
-					    			  					      
-					      }
-					      
-					      if (slider.getValue()==15)
-					      {
-					    	  calc.setBase(15);
-					    	  b_note.setText("calculating in base 15");
-					    	  for (int i=0; i < numList.size(); i++)
-					    		  if (i<0xF)
-					    		  (numList.get(i)).setEnabled(true);
-					    		  else
-					    		  (numList.get(i)).setEnabled(false);
-					    			  					      
-					      }
-					      else if(slider.getValue()==16)
-					      {
-					    	  calc.setBase(16);
-					    	  b_note.setText("calculating in base 16");
-					    	  for (int i=0; i < numList.size(); i++)
-					     		  (numList.get(i)).setEnabled(true);
+					    	setSlider(slider);
 					 				    			  					      
 					      }
 					     }
 					     } 
-					    });
+					    );
 						
 				slider.setOrientation(SwingConstants.VERTICAL);
 				add(slider, "cell 0 2 2 5");
@@ -481,21 +308,19 @@ public class Base4Panel extends JPanel {
 			}
 		}
 	
-				public void clear()
+		public void clear()
 		{
-			
 			 textField.setText("");
 			 current ="0";
 			 numExpected = true;
-			
 		}
 				
 		public void print()
 		{
 			current = calc.equate();
-			if (current=="0")//
-				textField.setText("");//
-			else//
+			if (current=="0")
+				textField.setText("");
+			else
 			textField.setText(current);
 		}
 		
@@ -504,8 +329,6 @@ public class Base4Panel extends JPanel {
 			inputA =textField.getText();
 		}
 		
-		
-		//NOTE:edit required, see log for issues w/ equals button
 	class opListener implements ActionListener
 		{
 		 public void actionPerformed (ActionEvent e)
@@ -526,23 +349,26 @@ public class Base4Panel extends JPanel {
 				 if (lastOp.equals( "=" ))
 				 {
 				calc.setCurr(inputA);
-				//textField.setText("");
 				numExpected=false;
 				 }
 				 else if (lastOp.equals("/"))
-				 {				 	
+				 {	
+					 inputA= Integer.toString(calc.base10in(inputA));			 	
 					 calc.divide(inputA);
 				  }
 				 else if (lastOp.equals( "+" ))
 				 {
+					 inputA= Integer.toString(calc.base10in(inputA));
 					 calc.sum(inputA);
 				 }
 				 else if (lastOp.equals( "-" ))
 				 {
+					 inputA= Integer.toString(calc.base10in(inputA));
 					calc.subtract(inputA);
 				 }
 				 else  if (lastOp.equals( "*" ))
 				 {
+					 inputA= Integer.toString(calc.base10in(inputA));
 					calc.multiply(inputA);
 				 }
 				 
@@ -566,6 +392,7 @@ public class Base4Panel extends JPanel {
 				 clear();
 					calc.clear();
 					textField.setText("Let's try that again..."); 
+					ex.printStackTrace();
 			 }
 			lastOp = e.getActionCommand();
 					 	
@@ -585,6 +412,30 @@ public class Base4Panel extends JPanel {
 				 calc.clear();
 			 }
 		 }
+		 
+		 void setSlider(JSlider JS)
+			{
+				for (int i=JS.getMinimum(); i< JS.getMaximum()+1 ;i++)
+				if (slider.getValue()==i)
+			      {
+			    	  calc.setBase(i);
+			    	  baseNotifier();
+			    	  toggleNumKeys();		  					      
+			      }
+			}
+		 void baseNotifier()
+			{
+				 b_note.setText("Base " + calc.getBase());
+			}
+			
+			void toggleNumKeys()
+			{
+				for (int i=0; i < numList.size(); i++)
+		    		  if (i<calc.getBase())
+		    		  (numList.get(i)).setEnabled(true);
+		    		  else
+		    		  (numList.get(i)).setEnabled(false);
+			}
 		 
 		 
 		
