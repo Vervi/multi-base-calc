@@ -8,10 +8,26 @@ import java.util.*;
  ** <p>
  *	Base4Panel class lays out the Graphical User Interface components of our Calculator.
  *  Utilizes methods in the Base4Calc class to handle action events.
+ *    
  * </p>
  * @see {@link Base4Calc}
  * @author zhi/N. Willis
- * @version 0.9.1 
+ * @version 0.9.1
+ * 
+ * Methods:
+ *  @see #addKeyPress()
+ *  @see #print()
+ *  @see #performCalc()
+ *  @see #baseNotifier()
+ *  @see #toggleNumKeys()
+ *  @see #readIn()
+ *  @see #Clear()
+ *  @see #setSlider(JSlider)
+ *  
+ *  @see numListener
+ *  @see opListener
+ *  @see freshListener
+ *  
  */
 @SuppressWarnings("serial")
 public class Base4Panel extends JPanel {
@@ -61,7 +77,10 @@ public class Base4Panel extends JPanel {
 	private ActionMap actMap;
 	
 	/**
-	 * Constructor for Base4Panel class.
+	 * <p>
+	 * Constructor for Base4Panel class. Utilizes MigLayout to arrange GUI elements and a 
+	 * Base4Calculator object to handle logic behind button actions. 
+	 * </p>
 	 */
 	Base4Panel() {
 		
