@@ -200,7 +200,7 @@ public class Base4Panel extends JPanel {
 							
 				equals = new JButton("=");
 				add(equals, "cell 5 7,alignx left,aligny center");
-				equals.addActionListener(clr);
+				equals.addActionListener(operand);
 					
 				op = new HashMap<Integer,JButton>(){
 				{	
@@ -508,9 +508,9 @@ public class Base4Panel extends JPanel {
 		{
 		 public void actionPerformed (ActionEvent e)
 			{
-			 	performCalc();
-			 	lastOp = e.getActionCommand();
-
+			 	performCalc(e);
+			 	if (lastOp =="=")
+			 		numExpected= false;//bypass att if not fn try changing num expectred	
 			}// end of oplistener decl
 		 
 		}
@@ -518,30 +518,21 @@ public class Base4Panel extends JPanel {
 		 {
 			 public void actionPerformed (ActionEvent c)
 			 {
-				 if(c.getActionCommand()=="C")
-				 {
 					 textField.setText("");
 					 calc.clear();
-				 }
-				 
-				 if(c.getActionCommand()=="=")
-				 {
-					 if (textField.equals(""))
-					 
-					 //add a state check look for intial/clear condition
-					 //need to create conditions at beg of constructor
-					 
-					 performCalc();
-				 }
+			
 			 }
 		 }
 		 
-		 void performCalc()
+		 void performCalc(ActionEvent e)
 		 {
+			 
 			 if (numExpected)
 			 	{
 			 		textField.setText("");
 			 		calc.clear();
+			 		lastOp ="=";
+			 		calc.setCurr("0");
 			 		textField.setText("oops trying entering a number.");
 			 	}
 			 	else
@@ -605,7 +596,10 @@ public class Base4Panel extends JPanel {
 					textField.setText("Let's try that again..."); 
 					ex.printStackTrace();
 			 }
-			
+			finally
+			{
+			lastOp =e.getActionCommand();	
+			}
 					 	
 			
 			}

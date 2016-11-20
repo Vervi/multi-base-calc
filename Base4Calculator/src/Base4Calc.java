@@ -165,7 +165,7 @@ void multiply(String A)//for now focusing just on 2 values
 */
 void subtract (String A)
 {
-	output +=Integer.valueOf(A);
+	output -=Integer.valueOf(A);
 	result = Integer.toString(output);
 }
 }
