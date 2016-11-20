@@ -9,9 +9,10 @@ import java.util.*;
  *  Utilizes methods in the Base4Calc class to handle action events.
  * </p>
  * @see {@link Base4Calc}
+ * @see {@link Base4Calculator}
  * @author zhi/N. Willis
 
-* @version 0.5.7
+* @version 0.5.8
  * 
  * Methods:
  *  @see #addKeyPress()
@@ -277,15 +278,15 @@ public class Base4Panel extends JPanel {
 					JSlider source = (JSlider)e.getSource();
 					if (!source.getValueIsAdjusting())
 					    {
-						
+						prevBase=calc.getBase();
 					  	setSlider(slider);
 					    }
 					}
-			     });
+			     });//end changeListener decl
 						
 				slider.setOrientation(SwingConstants.VERTICAL);
 				add(slider, "cell 0 2 2 5");
-		}
+		}//end of constructor
 
 /**
  * addKeyPress(Set S) takes a set object of type <Map.Entry<Integer, JButton> and loops through the entries 
@@ -314,9 +315,9 @@ public class Base4Panel extends JPanel {
                 JButton key = (JButton) press.getSource();
                 key.doClick();
             }
-     });
+     });//end of override fn
 	}
-	}
+	}//end method decl
 	
 	/**
 	 *  numListener is an implementation of ActionListener used with numeric keys/buttons. It handles writing 
@@ -337,7 +338,7 @@ public class Base4Panel extends JPanel {
 				textField.setText(textField.getText().concat(numInput));
 			}
 			}
-		}
+		}//end inner class decl
 	
 	 	/**
 	 	 * clear () method takes no parameters and has no return value. It resets the state of the calculator (irrespective
@@ -350,7 +351,7 @@ public class Base4Panel extends JPanel {
 			 textField.setText("");
 			 current ="0";
 			 numExpected = true;
-		}
+		}//end method decl
 				
 		/**
 		 * print() method takes no parameters and has no return value. It handles output to the
@@ -363,7 +364,7 @@ public class Base4Panel extends JPanel {
 				textField.setText("");
 			else
 			textField.setText(current);
-		}
+		}//end method decl
 		
 		/**
 		 *  opListener is an implementation of the ActionListener Interface.
@@ -454,7 +455,7 @@ public class Base4Panel extends JPanel {
 			}
 			 	}
 
-			}// end of oplistener decl
+			}// end of inner class decl
 		 
 		 /**
 		  * 
@@ -470,7 +471,7 @@ public class Base4Panel extends JPanel {
 				 textField.setText("");
 				 calc.clear();
 			 }
-		 }
+		 }//end inner class decl
 		 /**
 		  * setSlider(Jslider JS) method takes a Jslider as a parameter and does not return anything. It finds the minimum
 		  * and maximum values on the slider and then loops through them all setting the calculator base to the integer value
@@ -490,9 +491,9 @@ public class Base4Panel extends JPanel {
 			    	  calc.setBase(i);
 			    	  baseNotifier();
 			    	  toggleNumKeys();
-			    	  numChange(); //test
+			    	  numChange();
 			    	  			    	  
-			      }
+			      }//end method decl
 			}
 		 /**
 		  * baseNotifier() method is of type void and takes no parameters. Based on what base calculations are currently
@@ -503,7 +504,7 @@ public class Base4Panel extends JPanel {
 		 void baseNotifier()
 			{
 				 b_note.setText("Base " + calc.getBase());
-			}
+			}//end method decl
 		/**
 		 * toogleNumKeys() method is of type void and it takes no parameters. It loops through (in this case) an 
 		 * ArrayList of Jbuttons and activates/deactivates them depending on what base calculations are currently
@@ -518,21 +519,33 @@ public class Base4Panel extends JPanel {
 		   		  (numList.get(i)).setEnabled(true);
 		   		  else
 		   		  (numList.get(i)).setEnabled(false);
-			}
+			}//end method decl
 		 /**
 		  * numChange() method takes no parameters and has no return value. It reads in a string from
-		  *  the calculator's display in the last known base and sits it back to the display in the current
-		  *  base. Used in conjunction with the setSlider method. For reference purposes, current base is
-		  *  updated/maintained elsewhere in the setSlider method while prevBase is updated via opListener.  
+		  *  the calculator's display in the last known base and spits it back to the display in the current
+		  *  base. Used inside of the setSlider method inside of the Jslider changeListener. For reference purposes, current base is
+		  *  updated/maintained elsewhere in the setSlider method while prevBase is updated via both the opListener and changeListener.  
 		  */
 		 public void numChange()
 		 {
-						 
-			 inputA= textField.getText();
-			 int x = Integer.valueOf(inputA, prevBase);		
-			inputA= Integer.toString(x,calc.getBase());	
+			 try{
+				 inputA= textField.getText();
+			 if(!(inputA.equals("")|inputA =="")) 
+			 {		 
+			  int x = Integer.valueOf(inputA, prevBase);	
+			  System.out.println(prevBase);
+			inputA= Integer.toString(x,calc.getBase());
+			System.out.println(calc.getBase());
 			 textField.setText(inputA);
-		 }
+			 }
+			 }
+			 catch (NumberFormatException nfe)
+			 {
+				 textField.setText("Exceeds our boundaries...");
+				 calc.clear();
+				 //clear();
+			 }
+		 }//end method decl
 		 
 		
 }//end of class decl

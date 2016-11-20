@@ -3,7 +3,7 @@
  * and mathematical operations.
  * 
  * @author zhi/N. Willis
- * @version 0.5.7 
+ * @version 0.5.8 
  * 
  *  <p> Field Variables:
  * <ul>

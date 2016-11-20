@@ -7,11 +7,12 @@ A multi-base Swing calculator project for CISC 3120, Fall 2016. See the [instruc
 
 <p>
 
-Version:0.5.7/current
+Version:0.5.8/current
 
 revisions:
 <ul>
-	<li>added numChange() method to setSlider()</li>
+	<li>exception handling of numChange()</li>
+	<li>changed handler of prevBase</li> 
 </ul>
 
 under development:
