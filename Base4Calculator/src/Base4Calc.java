@@ -5,7 +5,7 @@
 
  * 
  * @author zhi/N. Willis
- * @version 0.9.4 
+ * @version 0.5.6 
  *  <p> Field Variables:
  * <ul>
  * 		<li>base : an integer variable pertaining to the number base the calculator is operating in</li>

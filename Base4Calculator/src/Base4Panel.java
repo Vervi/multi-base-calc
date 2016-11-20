@@ -11,7 +11,7 @@ import java.util.*;
  * @see {@link Base4Calc}
  * @author zhi/N. Willis
 
-* @version 0.9.4
+* @version 0.5.6
  * 
  * Methods:
  *  @see #addKeyPress()
@@ -65,6 +65,8 @@ public class Base4Panel extends JPanel {
 	String lastOp="=";
 	String inputA="0";
 	String current="0";
+	
+	String RPN ="0";
 	
 	private boolean numExpected = true;
 	private JLabel b_note;	//label to indicate current base

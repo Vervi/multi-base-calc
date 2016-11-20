@@ -10,7 +10,6 @@ import javax.swing.JFrame;
  * 
  * @see {@link Base4Calc}
  * @see {@link Base4Panel}
- * @version 0.9.4
  * @author zhi/N. Willis
  *
  */

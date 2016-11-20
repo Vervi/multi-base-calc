@@ -6,7 +6,20 @@ A multi-base Swing calculator project for CISC 3120, Fall 2016. See the [instruc
 ###DevNotes
 
 <p>
+Version:0.5.6/current
+Revisions:
+<ul>
+	<li>Fixed Equals Button</li>
+	<li>Javadoc updates</li>
+	<li>Fixed NumberFormatException</li>
+</ul>
 
+under development:
+<ul>
+	<li> RPN Calculation </li>
+	<li> Memento Design Pattern </li>
+
+</ul>
 </p>
 
 
@@ -19,7 +32,7 @@ Useful Plugin for handling GUI elements and layout design. The design view helpe
  </p>
  <br>
 
- <em>Calculator Logic:</em>
+ <em> Logic & Gui: </em>
  <p><a href="https://en.wikipedia.org/wiki/Quaternary_numeral_system"> Quarternary Numbers</a> Explanation of Quarternary Number System. Offered charts that were helpful in checking output/test cases.
  </p>
  <p>
@@ -34,7 +47,7 @@ Useful Plugin for handling GUI elements and layout design. The design view helpe
  </p> 
  <br>
  
- <em>Documentation:</em>
+ <em> Documentation: </em>
  <p>
  <a href ="https://www.wired.com/2010/02/html_cheatsheet/"> HTML Cheat Sheet </a>
 Syntax cheat sheet for Html. Great help in formatting documentation.
