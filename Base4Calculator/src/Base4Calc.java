@@ -5,7 +5,7 @@
 
  * 
  * @author zhi/N. Willis
- * @version 0.8.9 
+ * @version 0.9.1 
  *  <p> Field Variables:
  * <ul>
  * 		<li>base : an integer variable pertaining to the number base the calculator is operating in</li>
@@ -72,10 +72,16 @@ public class Base4Calc {
 	
 	int base10in(String s)
 {
+	String x="";
+	try
+	{	
 	input = Integer.valueOf(s, base);		//read number in desired base
-	String x = Integer.toString(input,base10);	
-	
-	//System.out.println(input);
+	x = Integer.toString(input,base10);	
+	}
+	catch(NumberFormatException nex)
+	{
+	x = "0";//fix att
+	}
 	return Integer.valueOf(x);	
 } 
 
@@ -96,9 +102,7 @@ int base10out(String s)
 
 public String equate()
 {
-	
 return result;
-	
 } 
 
 /**
@@ -118,16 +122,9 @@ void setCurr(String A)
 	 *		
  */
 void sum(String A)//for now focusing just on 2 values
-{	/*
-	output += base10in(A);
-	result = Integer.toString(output);
-	output = base10out(result);
-	*/
-	
+{	
 	output +=Integer.valueOf(A);
 	result = Integer.toString(output);
-	//output = base10out(result);
-	
 }
 //works
 
@@ -155,7 +152,6 @@ void multiply(String A)//for now focusing just on 2 values
 	output *=Integer.valueOf(A);
 	result = Integer.toString(output);
 }
-//works
 
 /**
  	*method: subtract takes a string as parameter and uses the 2 helper methods to convert the string to an integer in base 10
@@ -168,5 +164,5 @@ void subtract (String A)
 	output -=Integer.valueOf(A);
 	result = Integer.toString(output);
 }
-}
+}//end of class definition
 
