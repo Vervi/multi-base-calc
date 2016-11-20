@@ -436,7 +436,7 @@ public class Base4Panel extends JPanel {
 			 
 		void baseNotifier()
 		{
-			 b_note.setText("Base" + calc.getBase());
+			 b_note.setText("Base " + calc.getBase());
 		}
 		
 		void toggleNumKeys()
