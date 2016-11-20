@@ -10,9 +10,26 @@ import java.util.*;
  * </p>
  * @see {@link Base4Calc}
  * @author zhi/N. Willis
- 
+
+* @version 0.9.4
+ * 
+ * Methods:
+ *  @see #addKeyPress()
+ *  @see #print()
+ *  @see #baseNotifier()
+ *  @see #toggleNumKeys()
+ *  @see #clear()
+ *  @see #setSlider(JSlider)
+ *  
+ *  @see numListener
+ *  @see opListener
+ *  @see freshListener
+ *  
  */
 public class Base4Panel extends JPanel {
+
+	
+	private static final long serialVersionUID = 1L;
 
 	private Base4Calc calc; // this object will actually do the calculating work
 	
@@ -59,6 +76,11 @@ public class Base4Panel extends JPanel {
 	private InputMap inMap;
 	private ActionMap actMap;
 	
+	/**
+	 * Constructor of the Base4Panel utilizes the MigLayout to arrange GUI components.
+	 * 
+	 */
+	@SuppressWarnings("serial")
 	Base4Panel() {
 		
 		calc = new Base4Calc();
@@ -225,7 +247,7 @@ public class Base4Panel extends JPanel {
 			    inMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "keyPress");
 			    actMap.put("keyPress", new AbstractAction() 
 			     {
-			            @Override
+			       @Override
 		          public void actionPerformed(ActionEvent press) 
 		          {
 	                JButton key = (JButton) press.getSource();
@@ -244,28 +266,30 @@ public class Base4Panel extends JPanel {
 				
 				slider.setValue(16);
 				baseNotifier();
-	
-				
-				
-		        slider.addChangeListener(new ChangeListener() {
-					     public void stateChanged(ChangeEvent e) {
-					    JSlider source = (JSlider)e.getSource();
-					      if (!source.getValueIsAdjusting())
-					      {
-					    	setSlider(slider);
-					 				    			  					      
-					      }
-					     }
-					     } 
-					    );
+				slider.addChangeListener(new ChangeListener() 
+				{
+					public void stateChanged(ChangeEvent e) 
+					{
+					JSlider source = (JSlider)e.getSource();
+					if (!source.getValueIsAdjusting())
+					    {
+					  	setSlider(slider);
+					    }
+					}
+			     });
 						
 				slider.setOrientation(SwingConstants.VERTICAL);
 				add(slider, "cell 0 2 2 5");
-		
-	}
+		}
 
-
-	@SuppressWarnings("serial")
+/**
+ * addKeyPress(Set S) takes a set object of type <Map.Entry<Integer, JButton> and loops through the entries 
+ * to create inputMaps and actionMaps. Method is designed to allow the calculator to programmatically emulate a
+ * button click using the keyboard. Method does not return.
+ * 
+ * @param A : set made of a map that uses KeyEvent integers and Jbuttons as KV pairs
+ * 
+ */
 	public void addKeyPress(Set<Map.Entry<Integer, JButton>> A)
 	{
 	for (Map.Entry<Integer,JButton> pair : A) 
@@ -276,10 +300,8 @@ public class Base4Panel extends JPanel {
 		inMap = jb.getInputMap(WHEN_IN_FOCUSED_WINDOW);
         actMap = jb.getActionMap();
         
-        
         inMap.put(KeyStroke.getKeyStroke(pair.getKey(), 0), "keyPress");//0 indicates no modifiers
-        	            
-        actMap.put("keyPress", new AbstractAction() 
+   	    actMap.put("keyPress", new AbstractAction() 
         {
             @Override
             public void actionPerformed(ActionEvent press) 
@@ -291,6 +313,10 @@ public class Base4Panel extends JPanel {
 	}
 	}
 	
+	/**
+	 *  numListener is an implementation of ActionListener used with numeric keys/buttons. It handles writing 
+	 *  number strings to the calculator's display.
+	 */
 	 class numListener implements ActionListener
 	{
 		public void actionPerformed (ActionEvent click)
@@ -308,6 +334,12 @@ public class Base4Panel extends JPanel {
 			}
 		}
 	
+	 	/**
+	 	 * clear () method takes no parameters and has no return value. It resets the state of the calculator (irrespective
+	 	 * of base setting).
+	 	 * 
+	 	 */ 
+	 	 
 		public void clear()
 		{
 			 textField.setText("");
@@ -315,6 +347,10 @@ public class Base4Panel extends JPanel {
 			 numExpected = true;
 		}
 				
+		/**
+		 * print() method takes no parameters and has no return value. It handles output to the
+		 * calculator's "display".
+		 */
 		public void print()
 		{
 			current = calc.equate();
@@ -324,11 +360,14 @@ public class Base4Panel extends JPanel {
 			textField.setText(current);
 		}
 		
-		public void readIn() 
-		{
-			inputA =textField.getText();
-		}
-		
+		/**
+		 *  opListener is an implementation of the ActionListener Interface.
+		 * It is used to call methods form the Base4Calc class to handle arithmetic
+		 * operations based on button presses.
+		 * 
+		 * @see Base4Calc
+		 *
+		 */
 	class opListener implements ActionListener
 		{
 		 public void actionPerformed (ActionEvent e)
@@ -379,13 +418,13 @@ public class Base4Panel extends JPanel {
 			 {
 				clear();
 				calc.clear();
-				textField.setText("Not sure that's legal...");	
+				textField.setText("Illegal Operation");	
 			 }
 			 catch(NullPointerException nullie) //debug usage
 			 {
 				clear();
 				calc.clear();
-				textField.setText("I seem to be losing my faculties...");	
+				textField.setText("Find the missing link");	
 			 }
 			 catch(Exception ex)
 			 {
@@ -402,7 +441,12 @@ public class Base4Panel extends JPanel {
 
 			}// end of oplistener decl
 		 
-		 
+		 /**
+		  * 
+		  * freshListener is an implementation of the ActionListener Interface.
+		  * It is used with the clear button.
+		  *
+		  */
 		 class freshListener implements ActionListener
 		 {
 			 public void actionPerformed (ActionEvent c)
@@ -412,7 +456,17 @@ public class Base4Panel extends JPanel {
 				 calc.clear();
 			 }
 		 }
-		 
+		 /**
+		  * setSlider(Jslider JS) method takes a Jslider as a parameter and does not return anything. It finds the minimum
+		  * and maximum values on the slider and then loops through them all setting the calculator base to the integer value
+		  * returned by JSlider.getValue(). Method calls baseNotifier() and toggleNumKeys();
+		  *   
+		  * @param JS slider to control calculator base and button configuration
+		  * 
+		  * @see Base4Calc#setBase(int)
+		  * @see #baseNotifier()
+		  * @see #toggleNumKeys()
+		  */
 		 void setSlider(JSlider JS)
 			{
 				for (int i=JS.getMinimum(); i< JS.getMaximum()+1 ;i++)
@@ -423,20 +477,32 @@ public class Base4Panel extends JPanel {
 			    	  toggleNumKeys();		  					      
 			      }
 			}
+		 /**
+		  * baseNotifier() method is of type void and takes no parameters. Based on what base calculations are currently
+		  * being done in, jLabel text will change to indicate the current base.
+		  * 
+		  * 
+		  */
 		 void baseNotifier()
 			{
 				 b_note.setText("Base " + calc.getBase());
 			}
-			
-			void toggleNumKeys()
+		/**
+		 * toogleNumKeys() method is of type void and it takes no parameters. It loops through (in this case) an 
+		 * ArrayList of Jbuttons and activates/deactivates them depending on what base calculations are currently
+		 * being done in.
+		 * 
+		 *  
+		 */
+		public void toggleNumKeys()
 			{
-				for (int i=0; i < numList.size(); i++)
-		    		  if (i<calc.getBase())
-		    		  (numList.get(i)).setEnabled(true);
-		    		  else
-		    		  (numList.get(i)).setEnabled(false);
+			for (int i=0; i < numList.size(); i++)
+		  		  if (i<calc.getBase())
+		   		  (numList.get(i)).setEnabled(true);
+		   		  else
+		   		  (numList.get(i)).setEnabled(false);
 			}
 		 
 		 
 		
-}
+}//end of class decl
