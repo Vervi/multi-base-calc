@@ -2,17 +2,15 @@
  * Base4Calc class defines the logic behind our calculator. It is responsible for handling base conversions
  * and mathematical operations.
  * 
-
- * 
  * @author zhi/N. Willis
  * @version 0.5.6 
+ * 
  *  <p> Field Variables:
  * <ul>
  * 		<li>base : an integer variable pertaining to the number base the calculator is operating in</li>
- * 	<li>base10 : constant int variable to represent base 10 for simplified operation purposes
- * </li>
- * <li>input : integer version of string to be read in and converted into/out of base 10.</li>
- * <li>output : integer keeping track of current total (result)</li>
+ * 		<li>base10 : constant int variable to represent base 10 for simplified operation purposes</li>
+ * 		<li>input : integer version of string to be read in and converted into/out of base 10.</li>
+ * 		<li>output : integer keeping track of current total (result)</li>
  * </ul>
  * </p>
  *   

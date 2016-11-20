@@ -7,7 +7,8 @@ A multi-base Swing calculator project for CISC 3120, Fall 2016. See the [instruc
 
 <p>
 Version:0.5.6/current
-Revisions:
+
+revisions:
 <ul>
 	<li>Fixed Equals Button</li>
 	<li>Javadoc updates</li>

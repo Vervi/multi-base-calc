@@ -66,8 +66,6 @@ public class Base4Panel extends JPanel {
 	String inputA="0";
 	String current="0";
 	
-	String RPN ="0";
-	
 	private boolean numExpected = true;
 	private JLabel b_note;	//label to indicate current base
 	
