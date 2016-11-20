@@ -11,7 +11,7 @@ import java.util.*;
  * @see {@link Base4Calc}
  * @author zhi/N. Willis
 
-* @version 0.5.6
+* @version 0.5.7
  * 
  * Methods:
  *  @see #addKeyPress()
@@ -20,6 +20,7 @@ import java.util.*;
  *  @see #toggleNumKeys()
  *  @see #clear()
  *  @see #setSlider(JSlider)
+ *  @see #numChange()
  *  
  *  @see numListener
  *  @see opListener
@@ -65,13 +66,15 @@ public class Base4Panel extends JPanel {
 	String lastOp="=";
 	String inputA="0";
 	String current="0";
-	
+		
 	private boolean numExpected = true;
 	private JLabel b_note;	//label to indicate current base
+	private int prevBase;
 	
 	private HashMap<Integer,JButton> num;
 	private HashMap<Integer,JButton> op;
 	private ArrayList<JButton> numList;
+	
 	
 	private InputMap inMap;
 	private ActionMap actMap;
@@ -265,6 +268,7 @@ public class Base4Panel extends JPanel {
 				slider.setMaximum(16);
 				
 				slider.setValue(16);
+				prevBase = 16; //initial condition
 				baseNotifier();
 				slider.addChangeListener(new ChangeListener() 
 				{
@@ -273,6 +277,7 @@ public class Base4Panel extends JPanel {
 					JSlider source = (JSlider)e.getSource();
 					if (!source.getValueIsAdjusting())
 					    {
+						
 					  	setSlider(slider);
 					    }
 					}
@@ -387,8 +392,9 @@ public class Base4Panel extends JPanel {
 				 		 
 				 if (lastOp.equals( "=" ))
 				 {
-				calc.setCurr(inputA);
-				numExpected=false;
+					calc.setCurr(inputA);
+				    numExpected=false;
+					
 				 }
 				 else if (lastOp.equals("/"))
 				 {	
@@ -420,6 +426,12 @@ public class Base4Panel extends JPanel {
 				calc.clear();
 				textField.setText("Illegal Operation");	
 			 }
+			 catch(NumberFormatException nfe)
+			 	{
+				 clear();
+				 calc.clear();
+				 textField.setText("Illegal entry");				
+			 	}
 			 catch(NullPointerException nullie) //debug usage
 			 {
 				clear();
@@ -433,8 +445,11 @@ public class Base4Panel extends JPanel {
 					textField.setText("Let's try that again..."); 
 					ex.printStackTrace();
 			 }
+			 finally
+			 {
 			lastOp = e.getActionCommand();
-					 	
+			prevBase= calc.getBase();
+			 }	 	
 			
 			}
 			 	}
@@ -474,7 +489,9 @@ public class Base4Panel extends JPanel {
 			      {
 			    	  calc.setBase(i);
 			    	  baseNotifier();
-			    	  toggleNumKeys();		  					      
+			    	  toggleNumKeys();
+			    	  numChange(); //test
+			    	  			    	  
 			      }
 			}
 		 /**
@@ -502,7 +519,20 @@ public class Base4Panel extends JPanel {
 		   		  else
 		   		  (numList.get(i)).setEnabled(false);
 			}
-		 
+		 /**
+		  * numChange() method takes no parameters and has no return value. It reads in a string from
+		  *  the calculator's display in the last known base and sits it back to the display in the current
+		  *  base. Used in conjunction with the setSlider method. For reference purposes, current base is
+		  *  updated/maintained elsewhere in the setSlider method while prevBase is updated via opListener.  
+		  */
+		 public void numChange()
+		 {
+						 
+			 inputA= textField.getText();
+			 int x = Integer.valueOf(inputA, prevBase);		
+			inputA= Integer.toString(x,calc.getBase());	
+			 textField.setText(inputA);
+		 }
 		 
 		
 }//end of class decl

@@ -6,13 +6,12 @@ A multi-base Swing calculator project for CISC 3120, Fall 2016. See the [instruc
 ###DevNotes
 
 <p>
-Version:0.5.6/current
+
+Version:0.5.7/current
 
 revisions:
 <ul>
-	<li>Fixed Equals Button</li>
-	<li>Javadoc updates</li>
-	<li>Fixed NumberFormatException</li>
+	<li>added numChange() method to setSlider()</li>
 </ul>
 
 under development:
@@ -20,6 +19,11 @@ under development:
 	<li> RPN Calculation </li>
 	<li> Memento Design Pattern </li>
 
+</ul>
+
+IDE:
+<ul>
+	<li> Eclipse Neon.1 </li>
 </ul>
 </p>
 

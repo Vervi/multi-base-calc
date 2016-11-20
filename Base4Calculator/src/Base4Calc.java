@@ -3,7 +3,7 @@
  * and mathematical operations.
  * 
  * @author zhi/N. Willis
- * @version 0.5.6 
+ * @version 0.5.7 
  * 
  *  <p> Field Variables:
  * <ul>
@@ -108,16 +108,16 @@ return result;
 	 *		@param A of type String
 	 *		
  */
-void setCurr(String A)
+void setCurr(String A) throws NumberFormatException
 {
-	try
-	{
+	//try
+	//{
 	output =  Integer.valueOf(A,base);
-	}
+	/*}
 	catch(NumberFormatException nfe)
 	{
 	System.out.println("Input Illegible.");
-	}
+	}*/
 }
 
 /**
