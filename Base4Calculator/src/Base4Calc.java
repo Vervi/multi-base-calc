@@ -63,7 +63,7 @@ public class Base4Calc {
 	}
 
 /**
-	*method: base10in takes a string as parameter. using the parseInt method from the Integer class/wrapper the string is read into an 
+	*method: base10in takes a string as parameter. using the valueOf method from the Integer class/wrapper the string is read into an 
 	* int in the appropriate base. The int is then converted to base 10 and then cast back to (and returned as) a string.
 	* 	@param s of type String
 	* 	@return base 10 version of input string
@@ -72,7 +72,7 @@ public class Base4Calc {
 	
 	int base10in(String s)
 {
-	String x="";
+	String x="0";
 	try
 	{	
 	input = Integer.valueOf(s, base);		//read number in desired base
@@ -80,13 +80,13 @@ public class Base4Calc {
 	}
 	catch(NumberFormatException nex)
 	{
-	x = "0";//fix att
+	System.out.println(x);
 	}
 	return Integer.valueOf(x);	
 } 
 
 /**
-	*method: base10out takes a string as parameter. using the parseInt method from the Integer class/wrapper the string is read into an 
+	*method: base10out takes a string as parameter. using the valueOf method from the Integer class/wrapper the string is read into an 
 	* int in base10 The int is then converted to a different base and then cast back to (and returned as) a string.
 	* 	@param s of type String
 	*	@return input integer in original base
