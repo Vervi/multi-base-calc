@@ -57,7 +57,7 @@ Useful Plugin for handling GUI elements and layout design. The design view helpe
  
  <em> Layout: </em>
  <p> 
- <a href="http://miglayout.com/QuickStart.pdf"> MiGLayout Guide> </a> Quick Start guide for the MigLayout.
+ <a href="http://miglayout.com/QuickStart.pdf"> MiGLayout Guide </a> Quick Start guide for the MigLayout.
  </p>
  <br>
  
