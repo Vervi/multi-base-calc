@@ -43,7 +43,6 @@ Useful Plugin for handling GUI elements and layout design. The design view helpe
  <em> Logic: </em>
  <p><a href="https://en.wikipedia.org/wiki/Quaternary_numeral_system"> Quarternary Numbers</a> Explanation of Quarternary Number System. Offered charts that were helpful in checking output/test cases.
  </p>
- <br>
  <p>
 <a href="http://www.cleavebooks.co.uk/scol/calnumba.htm"> Number Base Calculator</a> Very helpful in testing Jslider and base conversion cases. Allows user to see representation of a specific value in multiple bases at one time.
 </p>
