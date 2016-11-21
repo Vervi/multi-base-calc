@@ -1,24 +1,26 @@
 # Project One
 
 
-A multi-base Swing calculator project for CISC 3120, Fall 2016. See the [instructions](http://bc-cisc3120-f16.github.io/project1).
+A multi-base Swing calculator project for CISC 3120, Fall 2016. For more information see [instructions](http://bc-cisc3120-f16.github.io/project1).
 
 ###DevNotes
 
 <p>
 
-Version:0.5.8/current
-
+Version:0.5.9c
+</p>
+<p>
 revisions:
 <ul>
-	<li>exception handling of numChange()</li>
-	<li>changed handler of prevBase</li> 
+		<li>edit of equals buttton fn</li> 
+		<li> changed condition of opListener</li>
 </ul>
 
 under development:
 <ul>
 	<li> RPN Calculation </li>
 	<li> Memento Design Pattern </li>
+	<li> Equal btn loops prev (non "=") fn</li>
 
 </ul>
 

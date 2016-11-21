@@ -12,7 +12,7 @@ import java.util.*;
  * @see {@link Base4Calculator}
  * @author zhi/N. Willis
 
-* @version 0.5.8
+* @version 0.5.9
  * 
  * Methods:
  *  @see #addKeyPress()
@@ -288,14 +288,14 @@ public class Base4Panel extends JPanel {
 				add(slider, "cell 0 2 2 5");
 		}//end of constructor
 
-/**
- * addKeyPress(Set S) takes a set object of type <Map.Entry<Integer, JButton> and loops through the entries 
- * to create inputMaps and actionMaps. Method is designed to allow the calculator to programmatically emulate a
- * button click using the keyboard. Method does not return.
- * 
- * @param A : set made of a map that uses KeyEvent integers and Jbuttons as KV pairs
- * 
- */
+	/**
+	 * addKeyPress(Set S) takes a set object of type <Map.Entry<Integer, JButton> and loops through the entries 
+	 * to create inputMaps and actionMaps. Method is designed to allow the calculator to programmatically emulate a
+	 * button click using the keyboard. Method does not return.
+	 * 
+	 * @param A : set made of a map that uses KeyEvent integers and Jbuttons as KV pairs
+	 * 
+	 */
 	public void addKeyPress(Set<Map.Entry<Integer, JButton>> A)
 	{
 	for (Map.Entry<Integer,JButton> pair : A) 
@@ -324,7 +324,7 @@ public class Base4Panel extends JPanel {
 	 *  number strings to the calculator's display.
 	 */
 	 class numListener implements ActionListener
-	{
+	 {
 		public void actionPerformed (ActionEvent click)
 		{
 			String numInput =click.getActionCommand();
@@ -378,84 +378,85 @@ public class Base4Panel extends JPanel {
 		{
 		 public void actionPerformed (ActionEvent e)
 			{
-			 	if (numExpected)
+			 	if (numExpected & !lastOp.equals("="))
 			 	{
-			 		//clear();
+			 		
 			 		textField.setText("");
 			 		calc.clear();
 			 		textField.setText("oops trying entering a number.");
 			 	}
+			 	
 			 	else
 			 	{
-			 numExpected = true;
-			 	try{
-				 inputA =textField.getText();
+			 		numExpected = true;
+			 		try{
+			 			inputA =textField.getText();
 				 		 
-				 if (lastOp.equals( "=" ))
-				 {
-					calc.setCurr(inputA);
-				    numExpected=false;
-					
-				 }
-				 else if (lastOp.equals("/"))
-				 {	
-					 inputA= Integer.toString(calc.base10in(inputA));			 	
-					 calc.divide(inputA);
-				  }
-				 else if (lastOp.equals( "+" ))
-				 {
-					 inputA= Integer.toString(calc.base10in(inputA));
-					 calc.sum(inputA);
-				 }
-				 else if (lastOp.equals( "-" ))
-				 {
-					 inputA= Integer.toString(calc.base10in(inputA));
-					calc.subtract(inputA);
-				 }
-				 else  if (lastOp.equals( "*" ))
-				 {
-					 inputA= Integer.toString(calc.base10in(inputA));
-					calc.multiply(inputA);
-				 }
+			 			if (lastOp.equals( "=" ))
+			 			{
+			 				calc.setCurr(inputA);
+			 				//numExpected=false;
+				    				
+			 			}
+			 			else if (lastOp.equals("/"))
+			 			{	
+					 		inputA= Integer.toString(calc.base10in(inputA));			 	
+			 				calc.divide(inputA);
+			 			}
+			 			else if (lastOp.equals( "+" ))
+			 			{
+			 				inputA= Integer.toString(calc.base10in(inputA));
+			 				calc.sum(inputA);
+			 			}
+			 			else if (lastOp.equals( "-" ))
+			 			{
+			 				inputA= Integer.toString(calc.base10in(inputA));
+			 				calc.subtract(inputA);
+			 			}
+			 			else  if (lastOp.equals( "*" ))
+				 	{
+			 				inputA= Integer.toString(calc.base10in(inputA));
+					 	calc.multiply(inputA);
+				 	}
+			 					 				
+			 			print();
 				 
-				 print();
-				 
-			 }
-			catch(ArithmeticException oops) 
-			 {
-				clear();
-				calc.clear();
-				textField.setText("Illegal Operation");	
-			 }
-			 catch(NumberFormatException nfe)
-			 	{
-				 clear();
-				 calc.clear();
-				 textField.setText("Illegal entry");				
+			 		}
+					catch(ArithmeticException oops) 
+					 {
+						clear();
+						calc.clear();
+						textField.setText("Illegal Operation");	
+					 }
+					 catch(NumberFormatException nfe)
+					 	{
+						 clear();
+						 calc.clear();
+						 textField.setText("Illegal entry");				
+					 	}
+					 catch(NullPointerException nullie) //debug usage
+					 {
+						clear();
+						calc.clear();
+						textField.setText("Find the missing link");	
+					 }
+					 catch(Exception ex)
+					 {
+						 clear();
+							calc.clear();
+							textField.setText("Let's try that again..."); 
+							ex.printStackTrace();
+					 }
+					 finally
+					 {
+					lastOp = e.getActionCommand();
+					prevBase= calc.getBase();
+					 }	 	
+				
 			 	}
-			 catch(NullPointerException nullie) //debug usage
-			 {
-				clear();
-				calc.clear();
-				textField.setText("Find the missing link");	
-			 }
-			 catch(Exception ex)
-			 {
-				 clear();
-					calc.clear();
-					textField.setText("Let's try that again..."); 
-					ex.printStackTrace();
-			 }
-			 finally
-			 {
-			lastOp = e.getActionCommand();
-			prevBase= calc.getBase();
-			 }	 	
-			
 			}
-			 	}
 
-			}// end of inner class decl
+		}// end of inner class decl
 		 
 		 /**
 		  * 
@@ -472,6 +473,7 @@ public class Base4Panel extends JPanel {
 				 calc.clear();
 			 }
 		 }//end inner class decl
+		 
 		 /**
 		  * setSlider(Jslider JS) method takes a Jslider as a parameter and does not return anything. It finds the minimum
 		  * and maximum values on the slider and then loops through them all setting the calculator base to the integer value
@@ -498,19 +500,18 @@ public class Base4Panel extends JPanel {
 		 /**
 		  * baseNotifier() method is of type void and takes no parameters. Based on what base calculations are currently
 		  * being done in, jLabel text will change to indicate the current base.
-		  * 
-		  * 
+		  *
 		  */
 		 void baseNotifier()
 			{
 				 b_note.setText("Base " + calc.getBase());
 			}//end method decl
+		 
 		/**
 		 * toogleNumKeys() method is of type void and it takes no parameters. It loops through (in this case) an 
 		 * ArrayList of Jbuttons and activates/deactivates them depending on what base calculations are currently
 		 * being done in.
 		 * 
-		 *  
 		 */
 		public void toggleNumKeys()
 			{
@@ -520,6 +521,7 @@ public class Base4Panel extends JPanel {
 		   		  else
 		   		  (numList.get(i)).setEnabled(false);
 			}//end method decl
+		
 		 /**
 		  * numChange() method takes no parameters and has no return value. It reads in a string from
 		  *  the calculator's display in the last known base and spits it back to the display in the current
