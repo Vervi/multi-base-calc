@@ -24,6 +24,7 @@ revisions:
 		<ul><li> code: white space removal </li>
 			<li> gui: colored buttons </li>
 			<li> gui: set look and feel </li>
+			</ul>	
 </ul>
 
 <p>
