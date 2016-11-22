@@ -19,6 +19,7 @@ public class Base4Calculator {
 	}
 
 	private static void createAndShowGUI() {
+		JFrame.setDefaultLookAndFeelDecorated(true);
 		JFrame frame = new JFrame("Base 4 Calculator");			
 		frame.add(new Base4Panel());
 

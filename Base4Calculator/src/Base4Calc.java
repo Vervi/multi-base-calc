@@ -116,8 +116,8 @@ void setCurr(String A) throws NumberFormatException
 }
 
 /**
-	 *method: sum takes a string as parameter and uses the 2 helper methods to convert the string to an integer in base 10
-	 *add it to the current value of output then convert said output back to the appropriate base.
+	 *method: sum takes a string as parameter (pre-converted to base 10) adds the current value of output and 
+	 *converts back to the appropriate base
 	 *		@param A of type String
 	 *		
  */
@@ -129,8 +129,8 @@ void sum(String A)//for now focusing just on 2 values
 //works
 
 /**
- 	*method: divide takes a string as parameter and uses the 2 helper methods to convert the string to an integer in base 10
- 	*divides the current value of output by it then convert said output back to the appropriate base.
+ 	*method: divide takes a string as parameter (pre-converted to base 10) divides the current
+ 	* value of output by it then convert said output back to the appropriate base.
  	*		@param A of type String
 	*		
 */
@@ -142,8 +142,8 @@ void divide(String A)//for now focusing just on 2 values
 }
 
 /**
- 	*method: multiply takes a string as parameter and uses the 2 helper methods to convert the string to an integer in base 10
- 	*multiply the current value of output by it then convert said output back to the appropriate base.
+ 	*method: multiply takes a string as parameter (pre-converted to base 10)  
+ 	*multiplies the current value of output by it and converts the result back to the appropriate base.
  	*		@param A of type String
 	*		
 */
@@ -154,8 +154,8 @@ void multiply(String A)//for now focusing just on 2 values
 }
 
 /**
- 	*method: subtract takes a string as parameter and uses the 2 helper methods to convert the string to an integer in base 10
- 	*find the difference between the current value of output and said integer then convert output back to the appropriate base.
+ 	*method: subtract takes a string as parameter (pre-converted to base 10)  finds the difference 
+ 	*between the current value of output and said integer then converts output back to the appropriate base.
  	*		@param A of type String
 	*		
 */
@@ -164,5 +164,18 @@ void subtract (String A)
 	output -=Integer.valueOf(A);
 	result = Integer.toString(output,base);
 }
+
+/**
+ * method: signFlip negates the sign of the current value. 
+ * 			under construction:
+ *  needs corresponding action listener & button in panel class
+ */
+void signFlip()
+{
+	output =Integer.valueOf(result);
+	result = Integer.toString(-output);
+	
+}
+
 }//end of class definition
 

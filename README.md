@@ -14,7 +14,10 @@ revisions:
 <ul>
 	<li>edit of equals buttton fn</li> 
 	<li>fixed base of output error</li>
+	<li>fixed javadoc commentary</li>
 	<li>changed condition of opListener</li>
+	<li>signFlip() method created</li>
+		<ul><li>panel implementation pending</li></ul>
 </ul>
 
 under development:

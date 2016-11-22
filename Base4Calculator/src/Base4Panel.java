@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
@@ -30,6 +31,7 @@ import java.util.*;
  */
 public class Base4Panel extends JPanel {
 
+	
 	private static final long serialVersionUID = 1L;
 
 	private Base4Calc calc; // this object will actually do the calculating work
@@ -199,6 +201,7 @@ public class Base4Panel extends JPanel {
 			for (JButton jb : numkeys ) 
 			{
 				jb.addActionListener(digit);
+				jb.setForeground(Color.BLUE);
 			}
 						
 			
@@ -236,6 +239,7 @@ public class Base4Panel extends JPanel {
 				for (JButton jb : opkeys ) 
 				{
 					jb.addActionListener(operand);
+					jb.setForeground(Color.RED);
 				}
 		
 				//add Keyboard Functionality
@@ -415,7 +419,7 @@ public class Base4Panel extends JPanel {
 			 			else  if (lastOp.equals( "*" ))
 				 	{
 			 				inputA= Integer.toString(calc.base10in(inputA));
-					 	calc.multiply(inputA);
+			 				calc.multiply(inputA);
 				 	}
 			 					 				
 			 			print();
@@ -534,9 +538,9 @@ public class Base4Panel extends JPanel {
 			 if(!(inputA.equals("")|inputA =="")) 
 			 {		 
 			  int x = Integer.valueOf(inputA, prevBase);	
-			  System.out.println(prevBase);
+			 // System.out.println(prevBase); //test line
 			inputA= Integer.toString(x,calc.getBase());
-			System.out.println(calc.getBase());
+			//System.out.println(calc.getBase());//test line
 			 textField.setText(inputA);
 			 }
 			 }
