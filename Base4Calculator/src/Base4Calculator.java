@@ -1,4 +1,6 @@
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UIManager.*;
 /**
  * 
  * Base4Calculator is a multi-base calculator able to perform simple arithmetic operations
@@ -19,6 +21,23 @@ public class Base4Calculator {
 	}
 
 	private static void createAndShowGUI() {
+		
+		try
+		{
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (Exception e)
+		
+		{
+				System.out.println("Desired look and feel unavailable, setting to system default");
+				
+		}
+		finally
+		{
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		JFrame frame = new JFrame("Base 4 Calculator");			
 		frame.add(new Base4Panel());
@@ -27,7 +46,7 @@ public class Base4Calculator {
 		frame.setSize(300, 300);
 		frame.setResizable(false);
 		frame.setVisible(true);
-		
+		}
 		
 	}
 }

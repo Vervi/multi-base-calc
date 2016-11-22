@@ -3,7 +3,7 @@
  * and mathematical operations.
  * 
  * @author zhi/N. Willis
- * @version 0.5.9
+ * @version 0.6.0
  * 
  *  <p> Field Variables:
  * <ul>
@@ -24,6 +24,7 @@
  *   @see #setCurr(String)
  *   @see #base10in(String)
  *   @see #base10out(String)
+ *   @see Base4Calc#signFlip()
  *   
  *  
  */
@@ -97,7 +98,9 @@ int base10out(String s)
 	input = Integer.valueOf(x);	
 	return input;
 } 
-
+/**
+ * @return current result
+ */
 public String equate()
 {
 return result;

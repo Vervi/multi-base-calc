@@ -7,24 +7,36 @@ A multi-base Swing calculator project for CISC 3120, Fall 2016. For more informa
 
 <p>
 
-Version:0.5.9c
+Version:0.6.0c
 </p>
+
 <p>
 revisions:
 <ul>
-	<li>edit of equals buttton fn</li> 
+	<li>documentation overhaul</li>
+	<li>edit of equals button fn</li> 
 	<li>fixed base of output error</li>
 	<li>fixed javadoc commentary</li>
 	<li>changed condition of opListener</li>
 	<li>signFlip() method created</li>
 		<ul><li>panel implementation pending</li></ul>
+	<li>aesthetic changes</li>
+		<ul><li> code: white space removal </li>
+			<li> gui: colored buttons </li>
+			<li> gui: set look and feel </li>
 </ul>
 
 under development:
 <ul>
+	<li> set equals button to recur previous operation</li>
+	<li> numpad operation </li>
+	<li> keyboard interaction for JSlider<li>
+</ul>
+
+<ul>	
+future development:	
 	<li> RPN Calculation </li>
-	<li> Memento Design Pattern </li>
-	<li> Equal btn loops prev (non "=") fn</li>
+	<li> Memento Design Pattern: stack and & state control </li>
 
 </ul>
 
@@ -34,6 +46,17 @@ IDE:
 </ul>
 </p>
 
+notes for the user:
+<p>
+
+Current implementation allows for the use of the full 10-key numeric keys to enter numbers into the calculator for bases 2-10. For bases 11 through 16 the key of the letter that corresponds with the base can be pressed. Example, in base 16 
+values are denoting 0-9 then the letters A-F. to enter the number 10 (decimal 10 not 10 in base 16 which is 16) one would use the 'A' key. 
+
+At the moment mapping to the numeric keys of the num pad is not functional but the arithmetic operator keys
+work just fine. The 'esc' key operates the clear button and the 'enter'/'return' key operates the equal button.
+
+
+</p>
 
 ### Tools & Works Cited 
 
@@ -60,9 +83,15 @@ Useful Eclipse Plugin for handling GUI elements and layout design. The design vi
  <br>
  
  <em> Layout: </em>
+ <p>
+ <a href="http://www.oracle.com/technetwork/java/architecture-142923.html"> Swing Architecture</a> General information use.
+ </p>
  <p> 
  <a href="http://miglayout.com/QuickStart.pdf"> MiGLayout Guide </a> Quick Start guide for the MigLayout.
  </p>
+ <p>
+ <a href="http://stackoverflow.com/questions/7612592/jframe-and-nimbus-look-and-feel"> Look & Feel</a> When trying to set the Look and Feel to "Nimbus" through Window Builder Pro I noticed that my calculator still showed the default windows/metal theme. I attempted the fix posted in this forum and noticed that while it did change the Jframe the inner JPanel/Gui components remained unchanged. Further research led me <a href=https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/nimbus.html> here </a>to some helpful Oracle Documentation(non-API web page) from which I utilized the provided try block.
+ </p> 
  <br>
  
  <em> Documentation: </em>

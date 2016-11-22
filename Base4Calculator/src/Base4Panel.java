@@ -13,7 +13,7 @@ import java.util.*;
  * @see {@link Base4Calculator}
  * @author zhi/N. Willis
 
-* @version 0.5.9
+* @version 0.6.0
  * 
  * Methods:
  *  @see #addKeyPress()
@@ -208,6 +208,7 @@ public class Base4Panel extends JPanel {
 		//creation of operand buttons
 				clear = new JButton("C");//clear button gets its own listener
 				clear.addActionListener(clr);
+				clear.setForeground(Color.RED);
 				add(clear, "cell 8 2,alignx center,aligny center");
 			
 				plus = new JButton("+"); 
@@ -239,7 +240,7 @@ public class Base4Panel extends JPanel {
 				for (JButton jb : opkeys ) 
 				{
 					jb.addActionListener(operand);
-					jb.setForeground(Color.RED);
+					jb.setForeground(Color.MAGENTA);
 				}
 		
 				//add Keyboard Functionality
