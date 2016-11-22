@@ -28,6 +28,7 @@ revisions:
 </ul>
 
 <p>
+
 under development:
 <ul>
 	<li> set equals button to recur previous operation</li>
