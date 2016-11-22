@@ -36,7 +36,7 @@ IDE:
 <em> Plugins:</em>
 
  <p><a href="http://www.eclipse.org/windowbuilder/">Window Builder Pro </a>
-Useful Plugin for handling GUI elements and layout design. The design view helped greatly in taking the guesswork out of component alignment. 
+Useful Eclipse Plugin for handling GUI elements and layout design. The design view helped greatly in taking the guesswork out of component alignment. 
  </p>
  <br>
 
