@@ -30,7 +30,6 @@ import java.util.*;
  */
 public class Base4Panel extends JPanel {
 
-	
 	private static final long serialVersionUID = 1L;
 
 	private Base4Calc calc; // this object will actually do the calculating work

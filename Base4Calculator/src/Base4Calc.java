@@ -124,7 +124,7 @@ void setCurr(String A) throws NumberFormatException
 void sum(String A)//for now focusing just on 2 values
 {	
 	output +=Integer.valueOf(A);
-	result = Integer.toString(output);
+	result = Integer.toString(output,base);
 }
 //works
 
@@ -138,7 +138,7 @@ void divide(String A)//for now focusing just on 2 values
 {	
 	
 	output /=Integer.valueOf(A);
-	result = Integer.toString(output);
+	result = Integer.toString(output,base);
 }
 
 /**
@@ -150,7 +150,7 @@ void divide(String A)//for now focusing just on 2 values
 void multiply(String A)//for now focusing just on 2 values
 {	
 	output *=Integer.valueOf(A);
-	result = Integer.toString(output);
+	result = Integer.toString(output,base);
 }
 
 /**
@@ -162,7 +162,7 @@ void multiply(String A)//for now focusing just on 2 values
 void subtract (String A)
 {
 	output -=Integer.valueOf(A);
-	result = Integer.toString(output);
+	result = Integer.toString(output,base);
 }
 }//end of class definition
 
