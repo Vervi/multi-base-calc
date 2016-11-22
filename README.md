@@ -34,9 +34,10 @@ under development:
 	<li> numpad operation </li>
 	<li> keyboard interaction for JSlider<li>
 </ul>
-
-<ul>	
+	
 future development:	
+
+<ul>
 	<li> RPN Calculation </li>
 	<li> Memento Design Pattern: stack and state control </li>
 
