@@ -13,7 +13,8 @@ Version:0.5.9c
 revisions:
 <ul>
 	<li>edit of equals buttton fn</li> 
-	<li> changed condition of opListener</li>
+	<li>fixed base of output error</li>
+	<li>changed condition of opListener</li>
 </ul>
 
 under development:
