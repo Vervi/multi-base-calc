@@ -26,6 +26,7 @@ revisions:
 			<li> gui: set look and feel </li>
 </ul>
 
+<p>
 under development:
 <ul>
 	<li> set equals button to recur previous operation</li>
@@ -36,7 +37,7 @@ under development:
 <ul>	
 future development:	
 	<li> RPN Calculation </li>
-	<li> Memento Design Pattern: stack and & state control </li>
+	<li> Memento Design Pattern: stack and state control </li>
 
 </ul>
 
