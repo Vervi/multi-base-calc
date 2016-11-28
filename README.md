@@ -2,6 +2,17 @@
 
 
 A multi-base Swing calculator project for CISC 3120, Fall 2016. For more information see [instructions](http://bc-cisc3120-f16.github.io/project1).
+###UserNotes
+<p>
+
+Current implementation allows for the use of the full 10-key numeric keys to enter numbers into the calculator for bases 2-10. For bases 11 through 16 the key of the letter that corresponds with the base can be pressed. Example, in base 16 
+values are denoting 0-9 then the letters A-F. to enter the number 10 (decimal 10 not 10 in base 16 which is 16) one would use the 'A' key. 
+
+At the moment mapping to the numeric keys of the num pad is not functional but the arithmetic operator keys
+work just fine. The 'esc' key operates the clear button and the 'enter'/'return' key operates the equal button.
+
+
+</p>
 
 ###DevNotes
 
@@ -50,17 +61,7 @@ IDE:
 </ul>
 </p>
 
-notes for the user:
-<p>
 
-Current implementation allows for the use of the full 10-key numeric keys to enter numbers into the calculator for bases 2-10. For bases 11 through 16 the key of the letter that corresponds with the base can be pressed. Example, in base 16 
-values are denoting 0-9 then the letters A-F. to enter the number 10 (decimal 10 not 10 in base 16 which is 16) one would use the 'A' key. 
-
-At the moment mapping to the numeric keys of the num pad is not functional but the arithmetic operator keys
-work just fine. The 'esc' key operates the clear button and the 'enter'/'return' key operates the equal button.
-
-
-</p>
 
 ### Tools & Works Cited 
 
